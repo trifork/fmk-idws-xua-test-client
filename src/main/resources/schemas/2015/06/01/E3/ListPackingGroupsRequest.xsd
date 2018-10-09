@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:medicinecard20150601="http://www.dkma.dk/medicinecard/xml.schema/2015/06/01"
+        xmlns:medicinecard20150601E2="http://www.dkma.dk/medicinecard/xml.schema/2015/06/01/E2"
+        xmlns:medicinecard20150601E3="http://www.dkma.dk/medicinecard/xml.schema/2015/06/01/E3"
+        targetNamespace="http://www.dkma.dk/medicinecard/xml.schema/2015/06/01/E3"
+        elementFormDefault="qualified"
+        attributeFormDefault="unqualified">
+
+    <import schemaLocation="importsFrom20150601.xsd" namespace="http://www.dkma.dk/medicinecard/xml.schema/2015/06/01"/>
+    <import schemaLocation="importsFrom20150601E2.xsd" namespace="http://www.dkma.dk/medicinecard/xml.schema/2015/06/01/E2"/>
+    <include schemaLocation="importsFrom20150601E3.xsd"/>
+
+	<element name="ListPackingGroupsRequest" type="medicinecard20150601E3:ListPackingGroupsRequestType">
+		<annotation>
+			<documentation xml:lang="en-GB">Outer container element for a request to list packing groups</documentation>
+			<documentation xml:lang="da-DK">Ydre container-element for en forespørgsel på at liste pakkegrupper</documentation>
+		</annotation>
+	</element>
+	<complexType name="ListPackingGroupsRequestType">
+		<sequence>
+			<choice>
+				<sequence>
+					<element name="OrderedAtPharmacyIdentifier" type="medicinecard20150601:OrganisationIdentifierType"/>
+					<element name="PackedAtOrganisationIdentifier" type="medicinecard20150601:OrganisationIdentifierType" minOccurs="0"/>
+				</sequence>
+				<element name="PackedAtOrganisationIdentifier" type="medicinecard20150601:OrganisationIdentifierType"/>
+			</choice>
+		</sequence>
+	</complexType>
+</schema>

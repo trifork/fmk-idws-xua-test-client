@@ -1,0 +1,5 @@
+# Managing line ending conversions
+*.java text
+*.xml text
+*.xjb text
+*.wsdl text

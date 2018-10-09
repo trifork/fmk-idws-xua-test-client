@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:medicinecard20150601="http://www.dkma.dk/medicinecard/xml.schema/2015/06/01" targetNamespace="http://www.dkma.dk/medicinecard/xml.schema/2015/06/01" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<include schemaLocation="Organisation.xsd"/>
+	<include schemaLocation="DoseDispensingPeriodStartDate.xsd"/>
+	<include schemaLocation="DoseDispensingPeriodEndDate.xsd"/>
+	<include schemaLocation="DoseDispensingDeadline.xsd"/>
+	<include schemaLocation="ProductionDay.xsd"/>
+	<include schemaLocation="PackingGroup.xsd"/>
+
+	<complexType name="DoseDispensingType">
+		<annotation>
+			<documentation xml:lang="en-GB">Details about an ordered dose dispensing packaging</documentation>
+			<documentation xml:lang="da-UK">Detaljer om en bestilt dosisdispenseret pakning</documentation>
+		</annotation>
+		<sequence>
+			<element name="PackedAtOrganisation" type="medicinecard20150601:OrganisationType" minOccurs="0"/>
+			<element name="FirstDosageDate" type="medicinecard20150601:DoseDispensingPeriodStartDateType" minOccurs="0"/>
+			<element name="LastDosageDate" type="medicinecard20150601:DoseDispensingPeriodEndDateType" minOccurs="0"/>
+			<element name="PackingGroup" type="medicinecard20150601:PackingGroupType" minOccurs="0"/>
+            <element name="Deadline" type="medicinecard20150601:DoseDispensingDeadlineType" minOccurs="0"/>
+		</sequence>
+	</complexType>
+</schema>

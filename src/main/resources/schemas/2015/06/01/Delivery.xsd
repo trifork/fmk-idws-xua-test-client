@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:medicinecard20150601="http://www.dkma.dk/medicinecard/xml.schema/2015/06/01" targetNamespace="http://www.dkma.dk/medicinecard/xml.schema/2015/06/01" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<include schemaLocation="DeliveryPriority.xsd"/>
+	<include schemaLocation="Organisation.xsd"/>
+	<include schemaLocation="StreetName.xsd"/>
+	<include schemaLocation="PseudoAddress.xsd"/>
+	<include schemaLocation="PostCode.xsd"/>
+	<include schemaLocation="ContactName.xsd"/>
+	<element name="Delivery" type="medicinecard20150601:DeliveryType">
+		<annotation>
+			<documentation xml:lang="en-GB">Delivery information</documentation>
+			<documentation xml:lang="da-DK">Leveringsinformation</documentation>
+		</annotation>
+	</element>
+	<complexType name="DeliveryType">
+		<sequence>
+			<element name="Priority" type="medicinecard20150601:DeliveryPriorityType"/>
+            <choice>
+                <sequence>
+                    <choice minOccurs="0">
+                        <element name="StreetName" type="medicinecard20150601:StreetNameType"/>
+                        <element name="PseudoAddress" type="medicinecard20150601:PseudoAddressType"/>
+                    </choice>
+                    <element name="PostCode" type="medicinecard20150601:PostCodeType" minOccurs="0"/>
+                    <element name="ContactName" type="medicinecard20150601:ContactNameType" minOccurs="0"/>
+                </sequence>
+                <element name="DeliverySite" type="medicinecard20150601:OrganisationType" minOccurs="0"/>
+            </choice>
+		</sequence>
+	</complexType>
+</schema>
