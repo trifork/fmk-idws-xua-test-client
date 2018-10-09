@@ -30,6 +30,9 @@ public class ApplicationRunner implements CommandLineRunner {
         this.sts = sts;
     }
 
+    @Option(name = "-h", aliases = "--help", help = true, usage = "displays help")
+    private boolean help;
+
     @Option(name = "-ws", aliases = "--webservice", usage = "webservice endpoint to use")
     private String webserviceEndpoint = "http://wsp-idws-xua:8444/HelloWorld/services/helloworld";
 
@@ -51,6 +54,14 @@ public class ApplicationRunner implements CommandLineRunner {
         try {
             // parse the arguments
             parser.parseArgument(args);
+
+            // Print help?
+            if (help) {
+                // print the list of available options
+                parser.printUsage(System.err);
+                System.err.println();
+                return;
+            }
         } catch (CmdLineException e) {
             // print error message
             System.err.println(e.getMessage());
