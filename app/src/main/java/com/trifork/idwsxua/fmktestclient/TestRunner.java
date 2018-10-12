@@ -51,11 +51,12 @@ public class TestRunner {
         TokenProvider.setToken(securityToken.getToken());
     }
 
-    void callService() throws Exception {
+    void callService(String personIdentifier) throws Exception {
         bootstrapCall();
 
         // then perform a webservice call, which implicitly performs an ActAs call to the STS to get a token for this endpoint
         GetMedicineCardRequestType requestType = new GetMedicineCardRequestType();
+        requestType.setPersonIdentifier(personIdentifier);
         GetMedicineCardResponseType response = port.getMedicineCard20150101(requestType);
 
         StringWriter sw = new StringWriter();

@@ -45,6 +45,9 @@ public class ApplicationRunner implements CommandLineRunner {
     @Option(name = "-m", aliases = "--ms", depends = "-l", usage = "milliseconds to wait in the infinite loop")
     private int ms = 1000;
 
+    @Option(name = "-p", aliases = "--personidentifier", usage = "person identifier to make GetMedicineCard request for")
+    private String personIdentifier = "1111111111";
+
     @Override
     public void run(String... args) throws Exception {
         CmdLineParser parser = new CmdLineParser(this);
@@ -84,11 +87,11 @@ public class ApplicationRunner implements CommandLineRunner {
 
         if (loop) {
             while (true) {
-                testRunner.callService();
+                testRunner.callService(personIdentifier);
                 Thread.sleep(ms);
             }
         } else {
-            testRunner.callService();
+            testRunner.callService(personIdentifier);
         }
     }
 }
