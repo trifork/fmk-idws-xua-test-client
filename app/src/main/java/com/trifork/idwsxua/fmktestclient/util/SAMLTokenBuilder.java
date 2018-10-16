@@ -38,7 +38,7 @@ public class SAMLTokenBuilder {
         config.setSignatureReferenceDigestMethod(SignatureConstants.ALGO_ID_DIGEST_SHA256);
     }
 
-    public String getToken(KeyStore ks, String alias, String password) {
+    public Assertion getAssertion(KeyStore ks, String alias, String password) {
         try {
             Issuer issuer = new IssuerBuilder().buildObject();
             issuer.setValue("CN=Henrik Jensen"); // self-issued
@@ -111,7 +111,6 @@ public class SAMLTokenBuilder {
             assertion.getAuthnStatements().add(authnStatement);
             assertion.setSignature(signature);
 
-
             Marshaller marshaller = Configuration.getMarshallerFactory().getMarshaller(assertion);
             marshaller.marshall(assertion);
 
@@ -119,9 +118,7 @@ public class SAMLTokenBuilder {
 
             logToken(assertion);
 
-            Element plaintextElement = marshaller.marshall(assertion);
-            String assertionString = XMLHelper.nodeToString(plaintextElement);
-            return Base64.encodeBase64String(assertionString.getBytes(Charset.forName("UTF-8")));
+            return assertion;
         } catch (Exception ex) {
             logger.error("Failed to generate self-signed token", ex);
         }

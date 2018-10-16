@@ -39,10 +39,10 @@ public class ApplicationRunner implements CommandLineRunner {
     @Option(name = "-s", aliases = "--sts", usage = "sts endpoint to use")
     private String stsEndpoint = "http://sts-idws-xua:8181/service/sts";
 
-    @Option(name = "-l", aliases = "--loop", usage = "call the endpoint in an infinite loop")
-    private boolean loop = false;
+    @Option(name = "-r", aliases = "--repeat", usage = "number of times to repeat the call")
+    private int repeat = 2;
 
-    @Option(name = "-m", aliases = "--ms", depends = "-l", usage = "milliseconds to wait in the infinite loop")
+    @Option(name = "-m", aliases = "--ms", depends = "-l", usage = "milliseconds to wait between the calls")
     private int ms = 1000;
 
     @Option(name = "-p", aliases = "--personidentifier", usage = "person identifier to make GetMedicineCard request for")
@@ -85,13 +85,13 @@ public class ApplicationRunner implements CommandLineRunner {
         provider.getRequestContext()
                 .put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, webserviceEndpoint);
 
-        if (loop) {
-            while (true) {
-                testRunner.callService(personIdentifier);
+        for (int i = 1; i <= repeat; i++) {
+            testRunner.callService(personIdentifier);
+            if(i < repeat) {
+                // Don't sleep in last round
                 Thread.sleep(ms);
             }
-        } else {
-            testRunner.callService(personIdentifier);
         }
+
     }
 }
