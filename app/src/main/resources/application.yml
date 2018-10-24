@@ -1,0 +1,10 @@
+spring:
+  main:
+    web-application-type: "none"
+    banner-mode: "off"
+
+idwsxua:
+  keystoreFile: "test-moces.pfx"
+  keystorePassword: "Test1234"
+  privateKeyPassword: "Test1234"
+

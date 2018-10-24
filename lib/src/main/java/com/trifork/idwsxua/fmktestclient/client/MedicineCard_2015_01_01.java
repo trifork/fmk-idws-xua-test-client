@@ -1,6 +1,7 @@
-package com.trifork.idwsxua.fmktestclient;
+package com.trifork.idwsxua.fmktestclient.client;
 
 import com.trifork.idwsxua.fmktestclient.security.TokenProvider;
+import com.trifork.idwsxua.fmktestclient.sts.XUASTSClient;
 import dk.dkma.medicinecard.xml_schema._2015._01._01.GetMedicineCardRequestType;
 import dk.dkma.medicinecard.xml_schema._2015._01._01.GetMedicineCardResponseType;
 import dk.dkma.medicinecard.xml_schema._2015._01._01.MedicineCardPortType;
@@ -15,21 +16,24 @@ import javax.xml.bind.Marshaller;
 import java.io.StringWriter;
 
 @Component
-public class TestRunner {
+public class MedicineCard_2015_01_01 extends Client {
 
-    private static Logger logger = LogManager.getLogger(TestRunner.class);
+    private static final Logger logger = LogManager.getLogger(MedicineCard_2015_01_01.class);
 
-    private final MedicineCardPortType port;
-    private final Marshaller mashaller;
+    private final Marshaller marshaller;
     private final TokenProvider tokenProvider;
+    private final XUASTSClient sts;
 
     @Autowired
-    public TestRunner(MedicineCardPortType port, Marshaller medicineCardMarshaller, TokenProvider tokenProvider) {
-        this.port = port;
-        this.mashaller = medicineCardMarshaller;
+    public MedicineCard_2015_01_01(MedicineCardPortType port, Marshaller medicineCardMarshaller, TokenProvider tokenProvider, XUASTSClient sts) {
+        super(port, sts);
+        this.marshaller = medicineCardMarshaller;
         this.tokenProvider = tokenProvider;
+        this.sts = sts;
     }
-    void callService(String personIdentifier) throws Exception {
+
+    @Override
+    public void callService(String personIdentifier) throws Exception {
         tokenProvider.refreshBootstrapToken();
 
         // then perform a webservice call, which implicitly performs an ActAs call to the STS to get a token for this endpoint
@@ -40,10 +44,10 @@ public class TestRunner {
         StringWriter sw = new StringWriter();
         ObjectFactory objectFactory = new ObjectFactory();
         JAXBElement<GetMedicineCardResponseType> je =  objectFactory.createGetMedicineCardResponse(response);
-        mashaller.marshal(je, sw);
+        marshaller.marshal(je, sw);
 
-        System.out.println("Reponse:");
-        System.out.println(sw);
+        logger.info("WSP reponse:");
+        logger.info(sw);
     }
 
 }

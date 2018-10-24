@@ -4,13 +4,18 @@ import com.trifork.idwsxua.fmktestclient.security.TokenProvider;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.cxf.Bus;
 import org.apache.cxf.staxutils.W3CDOMStreamWriter;
+import org.apache.cxf.ws.security.tokenstore.SecurityToken;
 import org.apache.cxf.ws.security.trust.STSClient;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Element;
 
 import java.nio.charset.Charset;
 import java.security.cert.X509Certificate;
 
 public class XUASTSClient extends STSClient {
+
+    private static final Logger logger = LogManager.getLogger(STSClient.class);
 
     public XUASTSClient(Bus b) {
         super(b);

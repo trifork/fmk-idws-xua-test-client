@@ -21,10 +21,10 @@
 	<bean id="XUASTSClient" class="com.trifork.idwsxua.fmktestclient.sts.XUASTSClient">
 		<constructor-arg ref="cxf" />
 
-		<property name="wsdlLocation" value="classpath:wsdl/sts.wsdl" />
+		<property name="wsdlLocation" value="classpath:sts.wsdl" />
 		<property name="serviceName" value="{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}SecurityTokenService" />
 		<property name="endpointName" value="{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}STS_Port" />
-		<property name="sendRenewing" value="false" />
+		<property name="sendRenewing" value="true" />
 		<property name="sendKeyType" value="false" />
 		<property name="requiresEntropy" value="false" />
 		<property name="tokenType" value="http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0" />
@@ -32,7 +32,7 @@
 		<property name="properties">
 			<map>
 				<!-- this is used to sign the request to the STS -->
-				<entry key="ws-security.signature.username" value="idws xua test wsc (funktionscertifikat)" />
+				<!--<entry key="ws-security.signature.username" value="idws xua test wsc (funktionscertifikat)" />-->
 				<entry key="ws-security.signature.properties" value="client.properties" />
 
 				<!-- this is used to verify the signature on the response from the STS -->

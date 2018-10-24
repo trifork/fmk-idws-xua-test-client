@@ -1,8 +1,7 @@
 package com.trifork.idwsxua.fmktestclient;
 
-import com.trifork.idwsxua.fmktestclient.sts.XUASTSClient;
-import dk.dkma.medicinecard.xml_schema._2015._01._01.MedicineCardPortType;
-import org.apache.cxf.message.Message;
+import com.trifork.idwsxua.fmktestclient.client.Client;
+import com.trifork.idwsxua.fmktestclient.client.MedicineCard_2015_01_01;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.kohsuke.args4j.CmdLineException;
@@ -12,22 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import javax.xml.ws.BindingProvider;
-
 @Component
 public class ApplicationRunner implements CommandLineRunner {
 
-    private Logger logger = LogManager.getLogger(CommandLineRunner.class);
+    private static final Logger logger = LogManager.getLogger(ApplicationRunner.class);
 
-    private final TestRunner testRunner;
-    private final MedicineCardPortType port;
-    private final XUASTSClient sts;
+    private final Client client;
 
     @Autowired
-    public ApplicationRunner(TestRunner testRunner, MedicineCardPortType port, XUASTSClient sts) {
-        this.testRunner = testRunner;
-        this.port = port;
-        this.sts = sts;
+    public ApplicationRunner(MedicineCard_2015_01_01 client) {
+        this.client = client;
     }
 
     @Option(name = "-h", aliases = "--help", help = true, usage = "displays help")
@@ -52,7 +45,7 @@ public class ApplicationRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         CmdLineParser parser = new CmdLineParser(this);
 
-        //System.out.println("args: " + Arrays.toString(args));
+        //logger.info("args: " + Arrays.toString(args));
 
         try {
             // parse the arguments
@@ -77,16 +70,18 @@ public class ApplicationRunner implements CommandLineRunner {
             return;
         }
 
-        // Change STS enspoint address
-        sts.getClient().getRequestContext().put(Message.ENDPOINT_ADDRESS, stsEndpoint);
+        // Starting app
+        logger.info("Starting FMK Test Client...");
+
+        // Change STS endpoint address
+        client.setSTSEndpoint(stsEndpoint);
 
         // Change WS endpoint address
-        BindingProvider provider = (BindingProvider) port;
-        provider.getRequestContext()
-                .put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, webserviceEndpoint);
+        client.setWebserviceEndpoint(webserviceEndpoint);
 
         for (int i = 1; i <= repeat; i++) {
-            testRunner.callService(personIdentifier);
+            logger.info("--- Call count: " + i + " ---");
+            client.callService(personIdentifier);
             if(i < repeat) {
                 // Don't sleep in last round
                 Thread.sleep(ms);

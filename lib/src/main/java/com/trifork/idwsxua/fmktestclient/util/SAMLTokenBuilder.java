@@ -9,6 +9,7 @@ import org.opensaml.Configuration;
 import org.opensaml.DefaultBootstrap;
 import org.opensaml.saml2.core.*;
 import org.opensaml.saml2.core.impl.*;
+import org.opensaml.xml.ConfigurationException;
 import org.opensaml.xml.io.Marshaller;
 import org.opensaml.xml.security.BasicSecurityConfiguration;
 import org.opensaml.xml.security.SecurityHelper;
@@ -21,7 +22,6 @@ import org.opensaml.xml.signature.impl.X509DataBuilder;
 import org.opensaml.xml.util.XMLHelper;
 import org.w3c.dom.Element;
 
-import java.nio.charset.Charset;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
@@ -29,16 +29,20 @@ import java.util.UUID;
 
 public class SAMLTokenBuilder {
 
-    private Logger logger = LogManager.getLogger(SAMLTokenBuilder.class);
+    private static final Logger logger = LogManager.getLogger(SAMLTokenBuilder.class);
 
-    public SAMLTokenBuilder() throws Exception {
-        DefaultBootstrap.bootstrap();
+    public SAMLTokenBuilder() {
+        try {
+            DefaultBootstrap.bootstrap();
+        } catch (ConfigurationException e) {
+            logger.error("Could not initialize OpenSAML");
+        }
 
         BasicSecurityConfiguration config = (BasicSecurityConfiguration) Configuration.getGlobalSecurityConfiguration();
         config.setSignatureReferenceDigestMethod(SignatureConstants.ALGO_ID_DIGEST_SHA256);
     }
 
-    public Assertion getAssertion(KeyStore ks, String alias, String password) {
+    public Assertion getAssertion(KeyStore ks, String alias, String privateKeyPassword) {
         try {
             Issuer issuer = new IssuerBuilder().buildObject();
             issuer.setValue("CN=Henrik Jensen"); // self-issued
@@ -84,7 +88,7 @@ public class SAMLTokenBuilder {
             authnStatement.setAuthnContext(authnContext);
 
             X509Certificate certificate = (X509Certificate) ks.getCertificate(alias);
-            PrivateKey privateKey = (PrivateKey) ks.getKey(alias, password.toCharArray());
+            PrivateKey privateKey = (PrivateKey) ks.getKey(alias, privateKeyPassword.toCharArray());
             Credential signingCredential = SecurityHelper.getSimpleCredential(certificate, privateKey);
 
             org.opensaml.xml.signature.X509Certificate cert = new X509CertificateBuilder().buildObject();
@@ -131,8 +135,8 @@ public class SAMLTokenBuilder {
         Element plaintextElement = marshaller.marshall(assertion);
         String assertionString = XMLHelper.prettyPrintXML(plaintextElement);
 
-        logger.info("**** start self-signed assertion ****");
-        logger.info(assertionString);
-        logger.info("**** end self-signed assertion ****");
+        logger.debug("**** start self-signed assertion ****");
+        logger.debug(assertionString);
+        logger.debug("**** end self-signed assertion ****");
     }
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %msg%n"/>
+        </Console>
+        <RollingFile name="File" fileName="logs/fmkclient.log" filePattern="logs/fmkclient-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout>
+                <Pattern>%d{ISO8601} [%t] %-5level %logger %x - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+
+        <!-- Log in Spring Boot -->
+        <Logger name="org.springframework.boot" level="WARN" additivity="true">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <!-- Log in Spring Core -->
+        <Logger name="org.springframework.core" level="WARN" additivity="true">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="com.trifork.idwsxua.fmktestclient" additivity="false">
+            <AppenderRef ref="Console" level="INFO"/>
+            <AppenderRef ref="File" level="DEBUG"/>
+        </Logger>
+
+        <Root level="INFO">
+            <AppenderRef ref="File"/>
+        </Root>
+
+    </Loggers>
+</Configuration>
