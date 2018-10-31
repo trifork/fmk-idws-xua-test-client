@@ -59,8 +59,8 @@ public class MedicineCard_2015_01_01 extends Client {
         final KeyStore systemKeystore = X509CertUtil.loadKeyStore(X509CertUtil.readResource("wsc.pfx"), "Test1234");
         final X509Certificate systemCertificate = (X509Certificate) systemKeystore.getCertificate("idws xua test wsc (funktionscertifikat)");
 
-        stsBootstrap.setUseKeyCertificate(systemCertificate);
-        sts.setUseKeyCertificate(systemCertificate);
+//        stsBootstrap.setUseKeyCertificate(systemCertificate);
+//        sts.setUseKeyCertificate(systemCertificate);
 
 
         final KeyStore employeeKeystore = X509CertUtil.getKeyStoreFromResource("MOCES_cpr_gyldig.p12", "Test1234");

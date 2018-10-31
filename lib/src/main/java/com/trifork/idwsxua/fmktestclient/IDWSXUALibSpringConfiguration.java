@@ -41,16 +41,16 @@ public class IDWSXUALibSpringConfiguration {
         MedicineCardPortType port = service.getMedicineCardPort();
 
         // One way to configure WS Security
-        Map<String,Object> outProps = new HashMap<>();
-        outProps.put(WSHandlerConstants.ACTION, "Signature");
-        outProps.put(WSHandlerConstants.USER, "idws xua test wsc (funktionscertifikat)");
-        outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientCallbackHandler.class.getName());
-        outProps.put(WSHandlerConstants.SIG_PROP_FILE, "wsc-client.properties");
-
-        WSS4JOutInterceptor wssOut = new WSS4JOutInterceptor(outProps);
-
-        Client client = ClientProxy.getClient(port);
-        client.getOutInterceptors().add(wssOut);
+//        Map<String,Object> outProps = new HashMap<>();
+//        outProps.put(WSHandlerConstants.ACTION, "Signature");
+//        outProps.put(WSHandlerConstants.USER, "idws xua test wsc (funktionscertifikat)");
+//        outProps.put(WSHandlerConstants.PW_CALLBACK_CLASS, ClientCallbackHandler.class.getName());
+//        outProps.put(WSHandlerConstants.SIG_PROP_FILE, "wsc-client.properties");
+//
+//        WSS4JOutInterceptor wssOut = new WSS4JOutInterceptor(outProps);
+//
+//        Client client = ClientProxy.getClient(port);
+//        client.getOutInterceptors().add(wssOut);
 
         // Another way to configure WS Security
         KeystorePasswordCallback callbackHandler = new KeystorePasswordCallback("Test1234");
