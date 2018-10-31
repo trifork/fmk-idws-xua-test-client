@@ -4,7 +4,7 @@ spring:
     banner-mode: "off"
 
 idwsxua:
-  keystoreFile: "test-moces.pfx"
+  keystoreFile: "MOCES_cpr_gyldig.p12"
   keystorePassword: "Test1234"
   privateKeyPassword: "Test1234"
 

@@ -26,8 +26,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <cxf.version>3.0.16</cxf.version>
+        <cxf.version>3.2.6</cxf.version>
     </properties>
+
+    <repositories>
+        <repository>
+            <id>NSP Nexus</id>
+            <url>https://nexus.nspop.dk/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
 
     <distributionManagement>
         <snapshotRepository>

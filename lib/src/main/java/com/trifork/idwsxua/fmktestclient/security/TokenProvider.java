@@ -1,29 +1,14 @@
 package com.trifork.idwsxua.fmktestclient.security;
 
-import com.trifork.idwsxua.fmktestclient.sts.XUASTSClient;
-import com.trifork.idwsxua.fmktestclient.util.Properties;
-import com.trifork.idwsxua.fmktestclient.util.SAMLTokenBuilder;
-import org.apache.cxf.ws.security.tokenstore.SecurityToken;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.joda.time.DateTime;
-import org.opensaml.Configuration;
-import org.opensaml.saml2.core.Assertion;
-import org.opensaml.xml.io.Marshaller;
-import org.opensaml.xml.io.MarshallingException;
-import org.opensaml.xml.util.XMLHelper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.w3c.dom.Element;
 
-import java.security.KeyStoreException;
+import org.springframework.stereotype.Component;
 
 @Component
 public class TokenProvider {
 
-    private static final Logger logger = LogManager.getLogger(TokenProvider.class);
+   /* private static final Logger logger = LogManager.getLogger(TokenProvider.class);
 
-    private final XUASTSClient stsClient;
+    private final XUASTSClient sts;
     private final Properties configuration;
 
     private static final ThreadLocal<Object> tokenHolder = new ThreadLocal<>(); // Can be both a String (SAML XML) or a SecurityToken
@@ -31,8 +16,8 @@ public class TokenProvider {
     private static final ThreadLocal<Assertion> assertionHolder = new ThreadLocal<>();
 
     @Autowired
-    public TokenProvider(XUASTSClient stsClient, Properties configuration) {
-        this.stsClient = stsClient;
+    public TokenProvider(XUASTSClient sts, Properties configuration) {
+        this.sts = sts;
         this.configuration = configuration;
     }
 
@@ -58,7 +43,13 @@ public class TokenProvider {
             SecurityToken newSecurityToken = null;
             try {
                 logger.info("Requesting new bootstrap token");
-                newSecurityToken = stsClient.requestSecurityToken("http://localhost:8080/service/hello");
+
+                sts.getClient().getRequestContext().put(Message.ENDPOINT_ADDRESS, "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee/bootstrap");
+
+                newSecurityToken = sts.requestSecurityToken("http://localhost:8080/service/hello");
+
+                sts.getClient().getRequestContext().put(Message.ENDPOINT_ADDRESS, "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee");
+
             } catch (Exception e) {
                 logger.error("Error requesting security token", e);
             }
@@ -98,5 +89,5 @@ public class TokenProvider {
         }
 
         return result;
-    }
+    }*/
 }

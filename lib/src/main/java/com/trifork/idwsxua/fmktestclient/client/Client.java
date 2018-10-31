@@ -5,7 +5,6 @@ import com.trifork.idwsxua.fmktestclient.sts.XUASTSClient;
 import dk.dkma.medicinecard.xml_schema._2015._01._01.MedicineCardPortType;
 import org.apache.cxf.BusException;
 import org.apache.cxf.endpoint.EndpointException;
-import org.apache.cxf.message.Message;
 
 import javax.xml.ws.BindingProvider;
 
@@ -17,6 +16,10 @@ public abstract class Client {
     Client(MedicineCardPortType port, XUASTSClient sts) {
         this.port = port;
         this.sts = sts;
+
+        // Add STS interceptor for logging
+        final XUASTSOutInterceptor xuastsOutInterceptor = new XUASTSOutInterceptor();
+        sts.getOutInterceptors().add(xuastsOutInterceptor);
     }
 
     public void setWebserviceEndpoint(String webserviceEndpoint) {
@@ -28,11 +31,7 @@ public abstract class Client {
 
     public void setSTSEndpoint(String stsEndpoint) throws EndpointException, BusException {
         // Change STS endpoint address
-        sts.getClient().getRequestContext().put(Message.ENDPOINT_ADDRESS, stsEndpoint);
-
-        // Add interceptor for logging
-        final XUASTSOutInterceptor xuastsOutInterceptor = new XUASTSOutInterceptor();
-        sts.getOutInterceptors().add(xuastsOutInterceptor);
+        //sts.getClient().getRequestContext().put(Message.ENDPOINT_ADDRESS, stsEndpoint);
     }
 
     public abstract void callService(String personIdentifier) throws Exception;

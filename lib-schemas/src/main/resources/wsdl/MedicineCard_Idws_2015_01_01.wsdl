@@ -1078,7 +1078,7 @@
 
     <wsdl:service name="MedicineCardService">
         <wsdl:port name="MedicineCardPort" binding="tns:MedicineCardBinding">
-            <soap:address location="https://wsp-idws-xua:8444/HelloWorld/services/helloworld"/>
+            <soap:address location="http://wsp-idws-xua:8444/HelloWorld/services/helloworld"/>
         </wsdl:port>
     </wsdl:service>
 
