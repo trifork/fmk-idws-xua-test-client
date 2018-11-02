@@ -30,6 +30,6 @@ import org.w3c.dom.Element;
 public class ActAsBootstrapCallbackHandler extends ActAsCallbackHandler {
     @Override
     protected Element getToken() {
-        return TokenHolder.bst;
+        return TokenHolder.bootstrapTokenElement;
     }
 }

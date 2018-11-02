@@ -52,7 +52,7 @@ public class OpenSaml3TokenBuilder {
 	}
 
 
-	public Element buildToken() throws CertificateEncodingException, SignatureException, MarshallingException {
+	public Assertion buildToken() throws CertificateEncodingException, SignatureException, MarshallingException {
 		final String nameIdValue = certificate.getSubjectX500Principal().getName(X500Principal.RFC1779, Collections.singletonMap("2.5.4.5", "SERIALNUMBER"));
 
 		Issuer issuer = new IssuerBuilder().buildObject();
@@ -124,13 +124,11 @@ public class OpenSaml3TokenBuilder {
 		assertion.setSignature(signature);
 
 		AssertionMarshaller marshaller = new AssertionMarshaller();
-
-//	        Marshaller marshaller = Configuration.getMarshallerFactory().getMarshaller(assertion);
-		Element xml = marshaller.marshall(assertion);
+		marshaller.marshall(assertion);
 
 		Signer.signObject(signature);
 
-		return xml;
+		return assertion;
 	}
 
 	public static XSAny createAttributeValue(String value, String type) {

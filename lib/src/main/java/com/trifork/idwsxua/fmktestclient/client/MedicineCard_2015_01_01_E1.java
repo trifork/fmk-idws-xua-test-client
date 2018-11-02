@@ -1,12 +1,13 @@
 package com.trifork.idwsxua.fmktestclient.client;
 
 import com.trifork.idwsxua.fmktestclient.security.TokenProvider;
-import com.trifork.idwsxua.fmktestclient.sts.XUASTSClient;
+import com.trifork.idwsxua.fmktestclient.sts.client.BootstrapClient;
+import com.trifork.idwsxua.fmktestclient.sts.client.EmployeeClient;
+import com.trifork.idwsxua.fmktestclient.sts.client.STSClientWrapper;
 import com.trifork.idwsxua.fmktestclient.util.Properties;
 import dk.dkma.medicinecard.xml_schema._2015._01._01._e1.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.opensaml.core.config.InitializationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -15,31 +16,22 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.ws.BindingProvider;
-import java.io.StringWriter;
 
-@SuppressWarnings("Duplicates")
 @Component
 public class MedicineCard_2015_01_01_E1 extends Client {
 
     private static final Logger logger = LogManager.getLogger(MedicineCard_2015_01_01_E1.class);
 
-    private final MedicineCardPortType port;
-    private final Marshaller marshaller;
+    private final MedicineCardPortType port = new MedicineCardService().getMedicineCardPort();
+    private final ObjectFactory objectFactory = new ObjectFactory();
+    private final Marshaller marshaller = medicineCardMarshaller();
 
     @Autowired
     public MedicineCard_2015_01_01_E1(Properties properties,
-                                      @Qualifier("bootstrapClient") XUASTSClient stsBootstrap,
-                                      @Qualifier("employeeClient") XUASTSClient stsIdentity,
-                                      TokenProvider tokenProvider) throws InitializationException, JAXBException {
+                                      @Qualifier("bootstrapClient") STSClientWrapper stsBootstrap,
+                                      @Qualifier("employeeClient") STSClientWrapper stsIdentity,
+                                      TokenProvider tokenProvider) throws JAXBException {
         super(properties, stsBootstrap, stsIdentity, tokenProvider);
-        this.marshaller = medicineCardMarshaller();
-        this.port = medicineCardPort(stsIdentity);
-
-        // Change WSP endpoint address
-        BindingProvider provider = (BindingProvider) this.port;
-        provider.getRequestContext()
-                .put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, properties.getWebserviceEndpoint());
     }
 
     @Override
@@ -51,21 +43,15 @@ public class MedicineCard_2015_01_01_E1 extends Client {
         requestType.setPersonIdentifier(personIdentifier);
         GetMedicineCardResponseType response = port.getMedicineCard20150101E1(requestType);
 
-        StringWriter sw = new StringWriter();
-        ObjectFactory objectFactory = new ObjectFactory();
-        JAXBElement<GetMedicineCardResponseType> je = objectFactory.createGetMedicineCardResponse(response);
-        marshaller.marshal(je, sw);
+        JAXBElement<GetMedicineCardResponseType> jaxbElement = objectFactory.createGetMedicineCardResponse(response);
+        final String responseString = getResponseString(jaxbElement, marshaller);
 
         logger.info("WSP reponse:");
-        logger.info(sw);
+        logger.info(responseString);
     }
 
-    private MedicineCardPortType medicineCardPort(XUASTSClient stsClient) {
-        MedicineCardService service = new MedicineCardService();
-        MedicineCardPortType port = service.getMedicineCardPort();
-
-        addWSSecurity((BindingProvider) port, stsClient);
-
+    @Override
+    protected MedicineCardPortType getPort() {
         return port;
     }
 

@@ -9,14 +9,16 @@ import org.apache.logging.log4j.Logger;
 public class XUASTSOutInterceptor extends AbstractPhaseInterceptor<Message> {
 
     private static final Logger logger = LogManager.getLogger(XUASTSOutInterceptor.class);
+    private final String stsName;
 
-    public XUASTSOutInterceptor() {
+    public XUASTSOutInterceptor(String stsName) {
         super(Phase.SETUP);
+        this.stsName = stsName;
     }
 
     public void handleMessage(Message message) {
-        final String action = message.getExchange().getBindingOperationInfo().getName().getLocalPart();
-        logger.info("Performing STS action: " + action);
+        final String soapAction = (String) message.get("SOAPAction");
+        logger.info(stsName + ", SOAPAction: " + soapAction);
     }
 
     public void handleFault(Message messageParam) {

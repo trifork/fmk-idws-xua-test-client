@@ -15,6 +15,13 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <repositories>
+        <repository>
+            <id>NSP Nexus</id>
+            <url>https://nexus.nspop.dk/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <!-- Spring Boot -->
         <!-- Should resolve versions based on parent project -->

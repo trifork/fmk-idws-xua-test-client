@@ -25,9 +25,13 @@
  */
 package com.trifork.idwsxua.fmktestclient.sts;
 
+import org.apache.cxf.ws.security.tokenstore.SecurityToken;
+import org.opensaml.saml.saml2.core.Assertion;
 import org.w3c.dom.Element;
 
 public class TokenHolder {
+    public static Assertion assertion;
     public static Element selfsigned;
-    public static Element bst;
+    public static Element bootstrapTokenElement;
+    public static SecurityToken bootstrapToken;
 }

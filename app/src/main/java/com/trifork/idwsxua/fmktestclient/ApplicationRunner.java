@@ -35,7 +35,7 @@ public class ApplicationRunner implements CommandLineRunner {
     private String webserviceEndpoint = "http://wsp-idws-xua:8444/HelloWorld/services/helloworld";
 
     @Option(name = "-r", aliases = "--repeat", usage = "number of times to repeat the call")
-    private int repeat = 1;
+    private int repeat = 2;
 
     @Option(name = "-m", aliases = "--ms", depends = "-l", usage = "milliseconds to wait between the calls")
     private int ms = 1000;
