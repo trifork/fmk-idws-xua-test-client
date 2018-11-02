@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wsdl:definitions name="MedicineCard"
-                  targetNamespace="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01"
+                  targetNamespace="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E1"
                   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
                   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap12/"
                   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                  xmlns:tns="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01"
+                  xmlns:tns="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E1"
                   xmlns:medicinecard20150101="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01"
+                  xmlns:medicinecard20150101E1="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E1"
                   xmlns:wsp="http://www.w3.org/ns/ws-policy"
                   xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
                   xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
@@ -14,7 +15,8 @@
 
     <wsdl:types>
 
-        <xsd:schema targetNamespace="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01" elementFormDefault="qualified">
+        <xsd:schema targetNamespace="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01"
+                    elementFormDefault="qualified">
 
             <xsd:include schemaLocation="../schemas/2015/01/01/AttachOrDetachPrescriptionMedicationRequest.xsd"/>
             <xsd:include schemaLocation="../schemas/2015/01/01/AttachOrDetachPrescriptionMedicationResponse.xsd"/>
@@ -29,7 +31,8 @@
             <xsd:include schemaLocation="../schemas/2015/01/01/CreateEffectuationResponse.xsd"/>
 
             <xsd:include schemaLocation="../schemas/2015/01/01/CreatePrescriptionMedicationForUseInPracticeRequest.xsd"/>
-            <xsd:include schemaLocation="../schemas/2015/01/01/CreatePrescriptionMedicationForUseInPracticeResponse.xsd"/>
+            <xsd:include
+                    schemaLocation="../schemas/2015/01/01/CreatePrescriptionMedicationForUseInPracticeResponse.xsd"/>
 
             <xsd:include schemaLocation="../schemas/2015/01/01/CreatePrescriptionMedicationRequest.xsd"/>
             <xsd:include schemaLocation="../schemas/2015/01/01/CreatePrescriptionMedicationResponse.xsd"/>
@@ -39,8 +42,6 @@
 
             <xsd:include schemaLocation="../schemas/2015/01/01/DeleteEffectuationRequest.xsd"/>
             <xsd:include schemaLocation="../schemas/2015/01/01/DeleteEffectuationResponse.xsd"/>
-
-            <xsd:include schemaLocation="../schemas/2015/01/01/FaultDetails.xsd"/>
 
             <xsd:include schemaLocation="../schemas/2015/01/01/GetDrugMedicationRequest.xsd"/>
             <xsd:include schemaLocation="../schemas/2015/01/01/GetDrugMedicationResponse.xsd"/>
@@ -54,9 +55,6 @@
             <xsd:include schemaLocation="../schemas/2015/01/01/GetMedicineCardAsPDFRequest.xsd"/>
             <xsd:include schemaLocation="../schemas/2015/01/01/GetMedicineCardAsPDFResponse.xsd"/>
 
-            <xsd:include schemaLocation="../schemas/2015/01/01/GetMedicineCardRequest.xsd"/>
-            <xsd:include schemaLocation="../schemas/2015/01/01/GetMedicineCardResponse.xsd"/>
-
             <xsd:include schemaLocation="../schemas/2015/01/01/GetMedicineCardVersionRequest.xsd"/>
             <xsd:include schemaLocation="../schemas/2015/01/01/GetMedicineCardVersionResponse.xsd"/>
 
@@ -66,7 +64,6 @@
             <xsd:include schemaLocation="../schemas/2015/01/01/GetPermissionsRequest.xsd"/>
             <xsd:include schemaLocation="../schemas/2015/01/01/GetPermissionsResponse.xsd"/>
 
-            <xsd:include schemaLocation="../schemas/2015/01/01/GetPrescriptionMedicationRequest.xsd"/>
             <xsd:include schemaLocation="../schemas/2015/01/01/GetPrescriptionMedicationResponse.xsd"/>
 
             <xsd:include schemaLocation="../schemas/2015/01/01/MarkPrescriptionMedicationDeprecatedRequest.xsd"/>
@@ -110,37 +107,41 @@
 
             <xsd:include schemaLocation="../schemas/2015/01/01/WithdrawDrugMedicationRequest.xsd"/>
             <xsd:include schemaLocation="../schemas/2015/01/01/WithdrawDrugMedicationResponse.xsd"/>
+
+            <xsd:include schemaLocation="../schemas/2015/01/01/FMKDetail.xsd"/>
         </xsd:schema>
-
-        <xsd:schema targetNamespace="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01"
+        <xsd:schema targetNamespace="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E1"
                     elementFormDefault="qualified">
+            <xsd:include schemaLocation="../schemas/2015/01/01/E1/GetMedicineCardRequest.xsd"/>
+            <xsd:include schemaLocation="../schemas/2015/01/01/E1/GetMedicineCardResponse.xsd"/>
 
-            <xsd:element name="IDWSFault">
-                <xsd:complexType>
-                    <xsd:sequence>
-                        <xsd:element name="faultcode" type="xsd:string"/>
-                        <xsd:element name="faultstring" type="xsd:string"/>
-                        <xsd:element name="faultdetails" type="tns:FaultDetailsType"/>
-                    </xsd:sequence>
-                </xsd:complexType>
-            </xsd:element>
+            <xsd:include schemaLocation="../schemas/2015/01/01/E1/GetMedicineCardVersionListRequest.xsd"/>
+            <xsd:include schemaLocation="../schemas/2015/01/01/E1/GetMedicineCardVersionListResponse.xsd"/>
+
+            <xsd:include schemaLocation="../schemas/2015/01/01/E1/GetPrescriptionMedicationRequest.xsd"/>
+
+            <xsd:include schemaLocation="../schemas/2015/01/01/E1/RemoveConsentRequest.xsd"/>
+            <xsd:include schemaLocation="../schemas/2015/01/01/E1/RemoveConsentResponse.xsd"/>
+
+            <xsd:include schemaLocation="../schemas/2015/01/01/E1/GiveConsentRequest.xsd"/>
+            <xsd:include schemaLocation="../schemas/2015/01/01/E1/GiveConsentResponse.xsd"/>
         </xsd:schema>
 
     </wsdl:types>
 
-    <wsdl:message name="IDWSFault">
-        <wsdl:part name="fault" element="tns:IDWSFault"/>
+    <wsdl:message name="FMKDetail">
+        <wsdl:part name="fault" element="medicinecard20150101:FMKDetail"/>
     </wsdl:message>
 
     <wsdl:message name="TimingHeader">
         <wsdl:part name="TimingHeader" element="medicinecard20150101:TimingList"/>
     </wsdl:message>
 
-    <wsdl:message name="GetMedicineCardRequest_2015_01_01">
-        <wsdl:part name="GetMedicineCardRequest" element="medicinecard20150101:GetMedicineCardRequest"/>
+    <wsdl:message name="GetMedicineCardRequest_2015_01_01_E1">
+        <wsdl:part name="GetMedicineCardRequest" element="medicinecard20150101E1:GetMedicineCardRequest"/>
     </wsdl:message>
-    <wsdl:message name="GetMedicineCardResponse_2015_01_01">
-        <wsdl:part name="GetMedicineCardResponse" element="medicinecard20150101:GetMedicineCardResponse"/>
+    <wsdl:message name="GetMedicineCardResponse_2015_01_01_E1">
+        <wsdl:part name="GetMedicineCardResponse" element="medicinecard20150101E1:GetMedicineCardResponse"/>
     </wsdl:message>
 
     <wsdl:message name="GetMedicineCardAsPDFRequest_2015_01_01">
@@ -161,7 +162,15 @@
         <wsdl:part name="GetMedicineCardVersionsRequest" element="medicinecard20150101:GetMedicineCardVersionsRequest"/>
     </wsdl:message>
     <wsdl:message name="GetMedicineCardVersionsResponse_2015_01_01">
-        <wsdl:part name="GetMedicineCardVersionsResponse" element="medicinecard20150101:GetMedicineCardVersionsResponse"/>
+        <wsdl:part name="GetMedicineCardVersionsResponse"
+                   element="medicinecard20150101:GetMedicineCardVersionsResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="GetMedicineCardVersionListRequest_2015_01_01_E1">
+        <wsdl:part name="GetMedicineCardVersionListRequest" element="medicinecard20150101E1:GetMedicineCardVersionListRequest"/>
+    </wsdl:message>
+    <wsdl:message name="GetMedicineCardVersionListResponse_2015_01_01_E1">
+        <wsdl:part name="GetMedicineCardVersionListResponse" element="medicinecard20150101E1:GetMedicineCardVersionListResponse"/>
     </wsdl:message>
 
     <wsdl:message name="UpdateMedicineCardRequest_2015_01_01">
@@ -172,17 +181,20 @@
     </wsdl:message>
 
     <wsdl:message name="SetMedicineCardNotReviewedRequest_2015_01_01">
-        <wsdl:part name="SetMedicineCardNotReviewedRequest" element="medicinecard20150101:SetMedicineCardNotReviewedRequest"/>
+        <wsdl:part name="SetMedicineCardNotReviewedRequest"
+                   element="medicinecard20150101:SetMedicineCardNotReviewedRequest"/>
     </wsdl:message>
     <wsdl:message name="SetMedicineCardNotReviewedResponse_2015_01_01">
-        <wsdl:part name="SetMedicineCardNotReviewedResponse" element="medicinecard20150101:SetMedicineCardNotReviewedResponse"/>
+        <wsdl:part name="SetMedicineCardNotReviewedResponse"
+                   element="medicinecard20150101:SetMedicineCardNotReviewedResponse"/>
     </wsdl:message>
 
     <wsdl:message name="SetMedicineCardReviewedRequest_2015_01_01">
         <wsdl:part name="SetMedicineCardReviewedRequest" element="medicinecard20150101:SetMedicineCardReviewedRequest"/>
     </wsdl:message>
     <wsdl:message name="SetMedicineCardReviewedResponse_2015_01_01">
-        <wsdl:part name="SetMedicineCardReviewedResponse" element="medicinecard20150101:SetMedicineCardReviewedResponse"/>
+        <wsdl:part name="SetMedicineCardReviewedResponse"
+                   element="medicinecard20150101:SetMedicineCardReviewedResponse"/>
     </wsdl:message>
 
     <wsdl:message name="GetDrugMedicationRequest_2015_01_01">
@@ -193,17 +205,21 @@
     </wsdl:message>
 
     <wsdl:message name="GetDrugMedicationVersionsRequest_2015_01_01">
-        <wsdl:part name="GetDrugMedicationVersionsRequest" element="medicinecard20150101:GetDrugMedicationVersionsRequest"/>
+        <wsdl:part name="GetDrugMedicationVersionsRequest"
+                   element="medicinecard20150101:GetDrugMedicationVersionsRequest"/>
     </wsdl:message>
     <wsdl:message name="GetDrugMedicationVersionsResponse_2015_01_01">
-        <wsdl:part name="GetDrugMedicationVersionsResponse" element="medicinecard20150101:GetDrugMedicationVersionsResponse"/>
+        <wsdl:part name="GetDrugMedicationVersionsResponse"
+                   element="medicinecard20150101:GetDrugMedicationVersionsResponse"/>
     </wsdl:message>
 
     <wsdl:message name="GetDrugMedicationHistoryRequest_2015_01_01">
-        <wsdl:part name="GetDrugMedicationHistoryRequest" element="medicinecard20150101:GetDrugMedicationHistoryRequest"/>
+        <wsdl:part name="GetDrugMedicationHistoryRequest"
+                   element="medicinecard20150101:GetDrugMedicationHistoryRequest"/>
     </wsdl:message>
     <wsdl:message name="GetDrugMedicationHistoryResponse_2015_01_01">
-        <wsdl:part name="GetDrugMedicationHistoryResponse" element="medicinecard20150101:GetDrugMedicationHistoryResponse"/>
+        <wsdl:part name="GetDrugMedicationHistoryResponse"
+                   element="medicinecard20150101:GetDrugMedicationHistoryResponse"/>
     </wsdl:message>
 
     <wsdl:message name="PauseDrugMedicationRequest_2015_01_01">
@@ -245,9 +261,9 @@
                    element="medicinecard20150101:CreatePrescriptionMedicationResponse"/>
     </wsdl:message>
 
-    <wsdl:message name="GetPrescriptionMedicationRequest_2015_01_01">
+    <wsdl:message name="GetPrescriptionMedicationRequest_2015_01_01_E1">
         <wsdl:part name="GetPrescriptionMedicationRequest"
-                   element="medicinecard20150101:GetPrescriptionMedicationRequest"/>
+                   element="medicinecard20150101E1:GetPrescriptionMedicationRequest"/>
     </wsdl:message>
     <wsdl:message name="GetPrescriptionMedicationResponse_2015_01_01">
         <wsdl:part name="GetPrescriptionMedicationResponse"
@@ -285,11 +301,13 @@
     </wsdl:message>
 
     <wsdl:message name="UnwithdrawDrugMedicationRequest_2015_01_01">
-        <wsdl:part name="UnwithdrawDrugMedicationRequest" element="medicinecard20150101:UnwithdrawDrugMedicationRequest"/>
+        <wsdl:part name="UnwithdrawDrugMedicationRequest"
+                   element="medicinecard20150101:UnwithdrawDrugMedicationRequest"/>
     </wsdl:message>
 
     <wsdl:message name="UnwithdrawDrugMedicationResponse_2015_01_01">
-        <wsdl:part name="UnwithdrawDrugMedicationResponse" element="medicinecard20150101:UnwithdrawDrugMedicationResponse"/>
+        <wsdl:part name="UnwithdrawDrugMedicationResponse"
+                   element="medicinecard20150101:UnwithdrawDrugMedicationResponse"/>
     </wsdl:message>
 
     <wsdl:message name="SearchEffectuationsRequest_2015_01_01">
@@ -332,32 +350,52 @@
     </wsdl:message>
 
     <wsdl:message name="MarkPrescriptionMedicationDeprecatedRequest_2015_01_01">
-        <wsdl:part name="MarkPrescriptionMedicationDeprecatedRequest" element="medicinecard20150101:MarkPrescriptionMedicationDeprecatedRequest"/>
+        <wsdl:part name="MarkPrescriptionMedicationDeprecatedRequest"
+                   element="medicinecard20150101:MarkPrescriptionMedicationDeprecatedRequest"/>
     </wsdl:message>
     <wsdl:message name="MarkPrescriptionMedicationDeprecatedResponse_2015_01_01">
-        <wsdl:part name="MarkPrescriptionMedicationDeprecatedResponse" element="medicinecard20150101:MarkPrescriptionMedicationDeprecatedResponse"/>
+        <wsdl:part name="MarkPrescriptionMedicationDeprecatedResponse"
+                   element="medicinecard20150101:MarkPrescriptionMedicationDeprecatedResponse"/>
     </wsdl:message>
 
     <wsdl:message name="UnmarkPrescriptionMedicationDeprecatedRequest_2015_01_01">
-        <wsdl:part name="UnmarkPrescriptionMedicationDeprecatedRequest" element="medicinecard20150101:UnmarkPrescriptionMedicationDeprecatedRequest"/>
+        <wsdl:part name="UnmarkPrescriptionMedicationDeprecatedRequest"
+                   element="medicinecard20150101:UnmarkPrescriptionMedicationDeprecatedRequest"/>
     </wsdl:message>
     <wsdl:message name="UnmarkPrescriptionMedicationDeprecatedResponse_2015_01_01">
-        <wsdl:part name="UnmarkPrescriptionMedicationDeprecatedResponse" element="medicinecard20150101:UnmarkPrescriptionMedicationDeprecatedResponse"/>
+        <wsdl:part name="UnmarkPrescriptionMedicationDeprecatedResponse"
+                   element="medicinecard20150101:UnmarkPrescriptionMedicationDeprecatedResponse"/>
     </wsdl:message>
 
     <wsdl:message name="CancelPrescriptionMedicationRequest_2015_01_01">
-        <wsdl:part name="CancelPrescriptionMedicationRequest" element="medicinecard20150101:CancelPrescriptionMedicationRequest"/>
+        <wsdl:part name="CancelPrescriptionMedicationRequest"
+                   element="medicinecard20150101:CancelPrescriptionMedicationRequest"/>
     </wsdl:message>
     <wsdl:message name="CancelPrescriptionMedicationResponse_2015_01_01">
-        <wsdl:part name="CancelPrescriptionMedicationResponse" element="medicinecard20150101:CancelPrescriptionMedicationResponse"/>
+        <wsdl:part name="CancelPrescriptionMedicationResponse"
+                   element="medicinecard20150101:CancelPrescriptionMedicationResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="RemoveConsentRequest_2015_01_01_E1">
+        <wsdl:part name="RemoveConsentRequest" element="medicinecard20150101E1:RemoveConsentRequest"/>
+    </wsdl:message>
+    <wsdl:message name="RemoveConsentResponse_2015_01_01_E1">
+        <wsdl:part name="RemoveConsentResponse" element="medicinecard20150101E1:RemoveConsentResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="GiveConsentRequest_2015_01_01_E1">
+        <wsdl:part name="GiveConsentRequest" element="medicinecard20150101E1:GiveConsentRequest"/>
+    </wsdl:message>
+    <wsdl:message name="GiveConsentResponse_2015_01_01_E1">
+        <wsdl:part name="GiveConsentResponse" element="medicinecard20150101E1:GiveConsentResponse"/>
     </wsdl:message>
 
     <wsdl:portType name="MedicineCardPortType">
 
-        <wsdl:operation name="GetMedicineCard_2015_01_01">
-            <wsdl:input name="GetMedicineCardRequest_2015_01_01" message="tns:GetMedicineCardRequest_2015_01_01"/>
-            <wsdl:output name="GetMedicineCardResponse_2015_01_01" message="tns:GetMedicineCardResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+        <wsdl:operation name="GetMedicineCard_2015_01_01_E1">
+            <wsdl:input name="GetMedicineCardRequest_2015_01_01_E1" message="tns:GetMedicineCardRequest_2015_01_01_E1"/>
+            <wsdl:output name="GetMedicineCardResponse_2015_01_01_E1" message="tns:GetMedicineCardResponse_2015_01_01_E1"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="GetMedicineCardAsPDF_2015_01_01">
@@ -365,7 +403,7 @@
                         message="tns:GetMedicineCardAsPDFRequest_2015_01_01"/>
             <wsdl:output name="GetMedicineCardAsPDFResponse_2015_01_01"
                          message="tns:GetMedicineCardAsPDFResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="GetMedicineCardVersion_2015_01_01">
@@ -373,7 +411,7 @@
                         message="tns:GetMedicineCardVersionRequest_2015_01_01"/>
             <wsdl:output name="GetMedicineCardVersionResponse_2015_01_01"
                          message="tns:GetMedicineCardVersionResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="GetMedicineCardVersions_2015_01_01">
@@ -381,14 +419,20 @@
                         message="tns:GetMedicineCardVersionsRequest_2015_01_01"/>
             <wsdl:output name="GetMedicineCardVersionsResponse_2015_01_01"
                          message="tns:GetMedicineCardVersionsResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="GetMedicineCardVersionList_2015_01_01_E1">
+            <wsdl:input name="GetMedicineCardVersionListRequest_2015_01_01_E1" message="tns:GetMedicineCardVersionListRequest_2015_01_01_E1"/>
+            <wsdl:output name="GetMedicineCardVersionListResponse_2015_01_01_E1" message="tns:GetMedicineCardVersionListResponse_2015_01_01_E1"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="UpdateMedicineCard_2015_01_01">
             <wsdl:input name="UpdateMedicineCardRequest_2015_01_01" message="tns:UpdateMedicineCardRequest_2015_01_01"/>
             <wsdl:output name="UpdateMedicineCardResponse_2015_01_01"
                          message="tns:UpdateMedicineCardResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="SetMedicineCardNotReviewed_2015_01_01">
@@ -396,7 +440,7 @@
                         message="tns:SetMedicineCardNotReviewedRequest_2015_01_01"/>
             <wsdl:output name="SetMedicineCardNotReviewedResponse_2015_01_01"
                          message="tns:SetMedicineCardNotReviewedResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="SetMedicineCardReviewed_2015_01_01">
@@ -404,28 +448,30 @@
                         message="tns:SetMedicineCardReviewedRequest_2015_01_01"/>
             <wsdl:output name="SetMedicineCardReviewedResponse_2015_01_01"
                          message="tns:SetMedicineCardReviewedResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="GetDrugMedication_2015_01_01">
             <wsdl:input name="GetDrugMedicationRequest_2015_01_01" message="tns:GetDrugMedicationRequest_2015_01_01"/>
             <wsdl:output name="GetDrugMedicationResponse_2015_01_01"
                          message="tns:GetDrugMedicationResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="GetDrugMedicationVersions_2015_01_01">
-            <wsdl:input name="GetDrugMedicationVersionsRequest_2015_01_01" message="tns:GetDrugMedicationVersionsRequest_2015_01_01"/>
+            <wsdl:input name="GetDrugMedicationVersionsRequest_2015_01_01"
+                        message="tns:GetDrugMedicationVersionsRequest_2015_01_01"/>
             <wsdl:output name="GetDrugMedicationVersionsResponse_2015_01_01"
                          message="tns:GetDrugMedicationVersionsResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="GetDrugMedicationHistory_2015_01_01">
-            <wsdl:input name="GetDrugMedicationHistoryRequest_2015_01_01" message="tns:GetDrugMedicationHistoryRequest_2015_01_01"/>
+            <wsdl:input name="GetDrugMedicationHistoryRequest_2015_01_01"
+                        message="tns:GetDrugMedicationHistoryRequest_2015_01_01"/>
             <wsdl:output name="GetDrugMedicationHistoryResponse_2015_01_01"
                          message="tns:GetDrugMedicationHistoryResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="PauseDrugMedication_2015_01_01">
@@ -433,7 +479,7 @@
                         message="tns:PauseDrugMedicationRequest_2015_01_01"/>
             <wsdl:output name="PauseDrugMedicationResponse_2015_01_01"
                          message="tns:PauseDrugMedicationResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="CreateDrugMedication_2015_01_01">
@@ -441,7 +487,7 @@
                         message="tns:CreateDrugMedicationRequest_2015_01_01"/>
             <wsdl:output name="CreateDrugMedicationResponse_2015_01_01"
                          message="tns:CreateDrugMedicationResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="AttachOrDetachPrescriptionMedication_2015_01_01">
@@ -449,14 +495,14 @@
                         message="tns:AttachOrDetachPrescriptionMedicationRequest_2015_01_01"/>
             <wsdl:output name="AttachOrDetachPrescriptionMedicationResponse_2015_01_01"
                          message="tns:AttachOrDetachPrescriptionMedicationResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="CreateEffectuation_2015_01_01">
             <wsdl:input name="CreateEffectuationRequest_2015_01_01" message="tns:CreateEffectuationRequest_2015_01_01"/>
             <wsdl:output name="CreateEffectuationResponse_2015_01_01"
                          message="tns:CreateEffectuationResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="CreatePrescriptionMedication_2015_01_01">
@@ -464,15 +510,15 @@
                         message="tns:CreatePrescriptionMedicationRequest_2015_01_01"/>
             <wsdl:output name="CreatePrescriptionMedicationResponse_2015_01_01"
                          message="tns:CreatePrescriptionMedicationResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
-        <wsdl:operation name="GetPrescriptionMedication_2015_01_01">
-            <wsdl:input name="GetPrescriptionMedicationRequest_2015_01_01"
-                        message="tns:GetPrescriptionMedicationRequest_2015_01_01"/>
+        <wsdl:operation name="GetPrescriptionMedication_2015_01_01_E1">
+            <wsdl:input name="GetPrescriptionMedicationRequest_2015_01_01_E1"
+                        message="tns:GetPrescriptionMedicationRequest_2015_01_01_E1"/>
             <wsdl:output name="GetPrescriptionMedicationResponse_2015_01_01"
                          message="tns:GetPrescriptionMedicationResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="SearchWithdrawnDrugMedications_2015_01_01">
@@ -480,7 +526,7 @@
                         message="tns:SearchWithdrawnDrugMedicationsRequest_2015_01_01"/>
             <wsdl:output name="SearchWithdrawnDrugMedicationsResponse_2015_01_01"
                          message="tns:SearchWithdrawnDrugMedicationsResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="UnpauseDrugMedication_2015_01_01">
@@ -488,7 +534,7 @@
                         message="tns:UnpauseDrugMedicationRequest_2015_01_01"/>
             <wsdl:output name="UnpauseDrugMedicationResponse_2015_01_01"
                          message="tns:UnpauseDrugMedicationResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="UpdateDrugMedication_2015_01_01">
@@ -496,7 +542,7 @@
                         message="tns:UpdateDrugMedicationRequest_2015_01_01"/>
             <wsdl:output name="UpdateDrugMedicationResponse_2015_01_01"
                          message="tns:UpdateDrugMedicationResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="WithdrawDrugMedication_2015_01_01">
@@ -504,7 +550,7 @@
                         message="tns:WithdrawDrugMedicationRequest_2015_01_01"/>
             <wsdl:output name="WithdrawDrugMedicationResponse_2015_01_01"
                          message="tns:WithdrawDrugMedicationResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="UnwithdrawDrugMedication_2015_01_01">
@@ -512,7 +558,7 @@
                         message="tns:UnwithdrawDrugMedicationRequest_2015_01_01"/>
             <wsdl:output name="UnwithdrawDrugMedicationResponse_2015_01_01"
                          message="tns:UnwithdrawDrugMedicationResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="SearchEffectuations_2015_01_01">
@@ -520,7 +566,7 @@
                         message="tns:SearchEffectuationsRequest_2015_01_01"/>
             <wsdl:output name="SearchEffectuationsResponse_2015_01_01"
                          message="tns:SearchEffectuationsResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="CreatePrescriptionMedicationForUseInPractice_2015_01_01">
@@ -528,7 +574,7 @@
                         message="tns:CreatePrescriptionMedicationForUseInPracticeRequest_2015_01_01"/>
             <wsdl:output name="CreatePrescriptionMedicationForUseInPracticeResponse_2015_01_01"
                          message="tns:CreatePrescriptionMedicationForUseInPracticeResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="CreatePrescriptionMedicationWithoutCPR_2015_01_01">
@@ -536,40 +582,57 @@
                         message="tns:CreatePrescriptionMedicationWithoutCPRRequest_2015_01_01"/>
             <wsdl:output name="CreatePrescriptionMedicationWithoutCPRResponse_2015_01_01"
                          message="tns:CreatePrescriptionMedicationWithoutCPRResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="DeleteEffectuation_2015_01_01">
             <wsdl:input name="DeleteEffectuationRequest_2015_01_01" message="tns:DeleteEffectuationRequest_2015_01_01"/>
             <wsdl:output name="DeleteEffectuationResponse_2015_01_01"
                          message="tns:DeleteEffectuationResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="GetPermissions_2015_01_01">
             <wsdl:input name="GetPermissionsRequest_2015_01_01" message="tns:GetPermissionsRequest_2015_01_01"/>
             <wsdl:output name="GetPermissionsResponse_2015_01_01" message="tns:GetPermissionsResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="MarkPrescriptionMedicationDeprecated_2015_01_01">
-            <wsdl:input name="MarkPrescriptionMedicationDeprecatedRequest_2015_01_01" message="tns:MarkPrescriptionMedicationDeprecatedRequest_2015_01_01"/>
-            <wsdl:output name="MarkPrescriptionMedicationDeprecatedResponse_2015_01_01" message="tns:MarkPrescriptionMedicationDeprecatedResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:input name="MarkPrescriptionMedicationDeprecatedRequest_2015_01_01"
+                        message="tns:MarkPrescriptionMedicationDeprecatedRequest_2015_01_01"/>
+            <wsdl:output name="MarkPrescriptionMedicationDeprecatedResponse_2015_01_01"
+                         message="tns:MarkPrescriptionMedicationDeprecatedResponse_2015_01_01"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="UnmarkPrescriptionMedicationDeprecated_2015_01_01">
-            <wsdl:input name="UnmarkPrescriptionMedicationDeprecatedRequest_2015_01_01" message="tns:UnmarkPrescriptionMedicationDeprecatedRequest_2015_01_01"/>
-            <wsdl:output name="UnmarkPrescriptionMedicationDeprecatedResponse_2015_01_01" message="tns:UnmarkPrescriptionMedicationDeprecatedResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:input name="UnmarkPrescriptionMedicationDeprecatedRequest_2015_01_01"
+                        message="tns:UnmarkPrescriptionMedicationDeprecatedRequest_2015_01_01"/>
+            <wsdl:output name="UnmarkPrescriptionMedicationDeprecatedResponse_2015_01_01"
+                         message="tns:UnmarkPrescriptionMedicationDeprecatedResponse_2015_01_01"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
         <wsdl:operation name="CancelPrescriptionMedication_2015_01_01">
-            <wsdl:input name="CancelPrescriptionMedicationRequest_2015_01_01" message="tns:CancelPrescriptionMedicationRequest_2015_01_01"/>
-            <wsdl:output name="CancelPrescriptionMedicationResponse_2015_01_01" message="tns:CancelPrescriptionMedicationResponse_2015_01_01"/>
-            <wsdl:fault name="IDWSFault" message="tns:IDWSFault"/>
+            <wsdl:input name="CancelPrescriptionMedicationRequest_2015_01_01"
+                        message="tns:CancelPrescriptionMedicationRequest_2015_01_01"/>
+            <wsdl:output name="CancelPrescriptionMedicationResponse_2015_01_01"
+                         message="tns:CancelPrescriptionMedicationResponse_2015_01_01"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
         </wsdl:operation>
 
+        <wsdl:operation name="RemoveConsent_2015_01_01_E1">
+            <wsdl:input name="RemoveConsentRequest_2015_01_01_E1" message="tns:RemoveConsentRequest_2015_01_01_E1"/>
+            <wsdl:output name="RemoveConsentResponse_2015_01_01_E1" message="tns:RemoveConsentResponse_2015_01_01_E1"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="GiveConsent_2015_01_01_E1">
+            <wsdl:input name="GiveConsentRequest_2015_01_01_E1" message="tns:GiveConsentRequest_2015_01_01_E1"/>
+            <wsdl:output name="GiveConsentResponse_2015_01_01_E1" message="tns:GiveConsentResponse_2015_01_01_E1"/>
+            <wsdl:fault name="FMKDetail" message="tns:FMKDetail"/>
+        </wsdl:operation>
     </wsdl:portType>
 
 
@@ -578,20 +641,20 @@
         <wsp:PolicyReference URI="#IDWS_XUA_Binding_Policy"/>
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-        <wsdl:operation name="GetMedicineCard_2015_01_01">
-            <soap:operation soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01#GetMedicineCard"
+        <wsdl:operation name="GetMedicineCard_2015_01_01_E1">
+            <soap:operation soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E1#GetMedicineCard"
                             style="document"/>
-            <wsdl:input name="GetMedicineCardRequest_2015_01_01">
+            <wsdl:input name="GetMedicineCardRequest_2015_01_01_E1">
                 <wsp:PolicyReference URI="#IDWS_XUA_Input_Policy"/>
                 <soap:body use="literal"/>
             </wsdl:input>
-            <wsdl:output name="GetMedicineCardResponse_2015_01_01">
+            <wsdl:output name="GetMedicineCardResponse_2015_01_01_E1">
                 <wsp:PolicyReference URI="#IDWS_XUA_Output_Policy"/>
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -607,8 +670,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -624,8 +687,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -641,8 +704,25 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="GetMedicineCardVersionList_2015_01_01_E1">
+            <soap:operation soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E1#GetMedicineCardVersionList"
+                            style="document"/>
+            <wsdl:input name="GetMedicineCardVersionListRequest_2015_01_01_E1">
+                <wsp:PolicyReference URI="#IDWS_XUA_Input_Policy"/>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="GetMedicineCardVersionListResponse_2015_01_01_E1">
+                <wsp:PolicyReference URI="#IDWS_XUA_Output_Policy"/>
+                <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -658,14 +738,15 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
         <wsdl:operation name="SetMedicineCardNotReviewed_2015_01_01">
-            <soap:operation soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01#SetMedicineCardNotReviewed"
-                            style="document"/>
+            <soap:operation
+                    soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01#SetMedicineCardNotReviewed"
+                    style="document"/>
             <wsdl:input name="SetMedicineCardNotReviewedRequest_2015_01_01">
                 <wsp:PolicyReference URI="#IDWS_XUA_Input_Policy"/>
                 <soap:body use="literal"/>
@@ -675,8 +756,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -692,8 +773,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -709,8 +790,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -726,8 +807,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -743,8 +824,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -760,8 +841,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -777,8 +858,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -795,8 +876,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -812,8 +893,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -830,15 +911,15 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
-        <wsdl:operation name="GetPrescriptionMedication_2015_01_01">
-            <soap:operation soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01#GetPrescriptionMedication"
+        <wsdl:operation name="GetPrescriptionMedication_2015_01_01_E1">
+            <soap:operation soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E1#GetPrescriptionMedication"
                             style="document"/>
-            <wsdl:input name="GetPrescriptionMedicationRequest_2015_01_01">
+            <wsdl:input name="GetPrescriptionMedicationRequest_2015_01_01_E1">
                 <wsp:PolicyReference URI="#IDWS_XUA_Input_Policy"/>
                 <soap:body use="literal"/>
             </wsdl:input>
@@ -847,8 +928,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -865,8 +946,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -882,8 +963,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -899,8 +980,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -916,8 +997,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -933,8 +1014,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -950,15 +1031,16 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
 
         <wsdl:operation name="CreatePrescriptionMedicationForUseInPractice_2015_01_01">
-            <soap:operation soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01#CreatePrescriptionMedicationForUseInPractice"
-                            style="document"/>
+            <soap:operation
+                    soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01#CreatePrescriptionMedicationForUseInPractice"
+                    style="document"/>
             <wsdl:input name="CreatePrescriptionMedicationForUseInPracticeRequest_2015_01_01">
                 <wsp:PolicyReference URI="#IDWS_XUA_Input_Policy"/>
                 <soap:body use="literal"/>
@@ -968,14 +1050,15 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
         <wsdl:operation name="CreatePrescriptionMedicationWithoutCPR_2015_01_01">
-            <soap:operation soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01#CreatePrescriptionMedicationWithoutCPR"
-                            style="document"/>
+            <soap:operation
+                    soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01#CreatePrescriptionMedicationWithoutCPR"
+                    style="document"/>
             <wsdl:input name="CreatePrescriptionMedicationWithoutCPRRequest_2015_01_01">
                 <wsp:PolicyReference URI="#IDWS_XUA_Input_Policy"/>
                 <soap:body use="literal"/>
@@ -985,8 +1068,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -1002,8 +1085,8 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
@@ -1019,14 +1102,15 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
         <wsdl:operation name="MarkPrescriptionMedicationDeprecated_2015_01_01">
-            <soap:operation soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01#MarkPrescriptionMedicationDeprecated"
-                            style="document"/>
+            <soap:operation
+                    soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01#MarkPrescriptionMedicationDeprecated"
+                    style="document"/>
             <wsdl:input name="MarkPrescriptionMedicationDeprecatedRequest_2015_01_01">
                 <wsp:PolicyReference URI="#IDWS_XUA_Input_Policy"/>
                 <soap:body use="literal"/>
@@ -1036,14 +1120,15 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
         <wsdl:operation name="UnmarkPrescriptionMedicationDeprecated_2015_01_01">
-            <soap:operation soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01#UnmarkPrescriptionMedicationDeprecated"
-                            style="document"/>
+            <soap:operation
+                    soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01#UnmarkPrescriptionMedicationDeprecated"
+                    style="document"/>
             <wsdl:input name="UnmarkPrescriptionMedicationDeprecatedRequest_2015_01_01">
                 <wsp:PolicyReference URI="#IDWS_XUA_Input_Policy"/>
                 <soap:body use="literal"/>
@@ -1053,14 +1138,15 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
 
         <wsdl:operation name="CancelPrescriptionMedication_2015_01_01">
-            <soap:operation soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01#CancelPrescriptionMedication"
-                            style="document"/>
+            <soap:operation
+                    soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01#CancelPrescriptionMedication"
+                    style="document"/>
             <wsdl:input name="CancelPrescriptionMedicationRequest_2015_01_01">
                 <wsp:PolicyReference URI="#IDWS_XUA_Input_Policy"/>
                 <soap:body use="literal"/>
@@ -1070,18 +1156,53 @@
                 <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
                 <soap:body use="literal"/>
             </wsdl:output>
-            <wsdl:fault name="IDWSFault">
-                <soap:fault name="IDWSFault" use="literal"/>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
             </wsdl:fault>
         </wsdl:operation>
+
+        <wsdl:operation name="RemoveConsent_2015_01_01_E1">
+            <soap:operation soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E1#RemoveConsent"
+                            style="document"/>
+            <wsdl:input name="RemoveConsentRequest_2015_01_01_E1">
+                <wsp:PolicyReference URI="#IDWS_XUA_Input_Policy"/>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="RemoveConsentResponse_2015_01_01_E1">
+                <wsp:PolicyReference URI="#IDWS_XUA_Output_Policy"/>
+                <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="GiveConsent_2015_01_01_E1">
+            <soap:operation soapAction="http://www.dkma.dk/medicinecard/xml.schema/2015/01/01/E1#GiveConsent"
+                            style="document"/>
+            <wsdl:input name="GiveConsentRequest_2015_01_01_E1">
+                <wsp:PolicyReference URI="#IDWS_XUA_Input_Policy"/>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="GiveConsentResponse_2015_01_01_E1">
+                <wsp:PolicyReference URI="#IDWS_XUA_Output_Policy"/>
+                <soap:header use="literal" part="TimingHeader" message="tns:TimingHeader"/>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="FMKDetail">
+                <soap:fault name="FMKDetail" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
     </wsdl:binding>
+
 
     <wsdl:service name="MedicineCardService">
         <wsdl:port name="MedicineCardPort" binding="tns:MedicineCardBinding">
-            <soap:address location="http://wsp-idws-xua:8444/HelloWorld/services/helloworld"/>
+            <soap:address location="https://test1.fmk.netic.dk/fmk12/idwsxua/medicinecard"/>
         </wsdl:port>
     </wsdl:service>
-
 
     <wsp:Policy wsu:Id="IDWS_XUA_Binding_Policy">
         <wsp:ExactlyOne>

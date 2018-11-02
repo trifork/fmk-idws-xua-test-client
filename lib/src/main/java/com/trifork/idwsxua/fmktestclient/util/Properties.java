@@ -15,36 +15,60 @@ import java.security.KeyStore;
 
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties("idwsxua")
+@ConfigurationProperties(prefix="fmkclient")
 public class Properties {
 
     private static final Logger logger = LogManager.getLogger(Properties.class);
 
-    // Auto mapped
     private String keystoreFile;
     private String keystorePassword;
     private String privateKeyPassword;
+    private String webserviceEndpoint;
+    private String apiVersion;
+    private String personIdentifier;
+    private STSBootstrap stsBootstrap = new STSBootstrap();
+    private STSIdentity stsIdentity = new STSIdentity();
 
-    // Programmatically set
-    private KeyStore keystore;
+    public class STSBootstrap {
+        private String endpoint;
+        private String audience;
 
-    @PostConstruct
-    private void init() throws IOException {
-        final InputStream keystoreFileInputStream = new ClassPathResource(getKeystoreFile()).getInputStream();
-        setKeystore(loadKeystore(keystoreFileInputStream, getKeystorePassword()));
-    }
-
-    private KeyStore loadKeystore(InputStream keystoreFileInputStream, String password) {
-        KeyStore ks = null;
-
-        try {
-            ks = KeyStore.getInstance("PKCS12");
-            ks.load(keystoreFileInputStream, password.toCharArray());
-        } catch (GeneralSecurityException | IOException ex) {
-            logger.error("Could not load keystore with provided password", ex);
+        public String getEndpoint() {
+            return endpoint;
         }
 
-        return ks;
+        public void setEndpoint(String endpoint) {
+            this.endpoint = endpoint;
+        }
+
+        public String getAudience() {
+            return audience;
+        }
+
+        public void setAudience(String audience) {
+            this.audience = audience;
+        }
+    }
+
+    public class STSIdentity {
+        private String endpoint;
+        private String audience;
+
+        public String getEndpoint() {
+            return endpoint;
+        }
+
+        public void setEndpoint(String endpoint) {
+            this.endpoint = endpoint;
+        }
+
+        public String getAudience() {
+            return audience;
+        }
+
+        public void setAudience(String audience) {
+            this.audience = audience;
+        }
     }
 
     public String getKeystoreFile() {
@@ -71,12 +95,43 @@ public class Properties {
         this.privateKeyPassword = privateKeyPassword;
     }
 
-    public KeyStore getKeystore() {
-        return keystore;
+    public String getWebserviceEndpoint() {
+        return webserviceEndpoint;
     }
 
-    public void setKeystore(KeyStore keystore) {
-        this.keystore = keystore;
+    public void setWebserviceEndpoint(String webserviceEndpoint) {
+        this.webserviceEndpoint = webserviceEndpoint;
     }
 
+    public String getApiVersion() {
+        return apiVersion;
+    }
+
+    public void setApiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
+    }
+
+    public String getPersonIdentifier() {
+        return personIdentifier;
+    }
+
+    public void setPersonIdentifier(String personIdentifier) {
+        this.personIdentifier = personIdentifier;
+    }
+
+    public STSBootstrap getStsBootstrap() {
+        return stsBootstrap;
+    }
+
+    public void setStsBootstrap(STSBootstrap stsBootstrap) {
+        this.stsBootstrap = stsBootstrap;
+    }
+
+    public STSIdentity getStsIdentity() {
+        return stsIdentity;
+    }
+
+    public void setStsIdentity(STSIdentity stsIdentity) {
+        this.stsIdentity = stsIdentity;
+    }
 }

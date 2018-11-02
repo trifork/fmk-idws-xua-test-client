@@ -1,0 +1,18 @@
+spring:
+  main:
+    web-application-type: "none"
+    banner-mode: "off"
+
+fmkclient:
+  keystoreFile: "MOCES_cpr_gyldig.p12"
+  keystorePassword: "Test1234"
+  privateKeyPassword: "Test1234"
+  webserviceEndpoint: "http://wsp-idws-xua:8444/HelloWorld/services/helloworld"
+  apiVersion: "MedicineCard_2015_01_01"
+  personIdentifier: "1111111111"
+  stsBootstrap:
+    endpoint: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee/bootstrap"
+    audience: "https://fmk"
+  stsIdentity:
+    endpoint: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee"
+    audience: "http://sts.sundhedsdatastyrelsen.dk/"

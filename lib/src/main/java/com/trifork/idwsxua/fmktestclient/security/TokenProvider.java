@@ -1,93 +1,73 @@
 package com.trifork.idwsxua.fmktestclient.security;
 
 
+import com.trifork.idwsxua.fmktestclient.interceptor.XUASTSOutInterceptor;
+import com.trifork.idwsxua.fmktestclient.sts.OpenSaml3TokenBuilder;
+import com.trifork.idwsxua.fmktestclient.sts.SessionContextHolder;
+import com.trifork.idwsxua.fmktestclient.sts.TokenHolder;
+import com.trifork.idwsxua.fmktestclient.util.Properties;
+import com.trifork.idwsxua.fmktestclient.util.X509CertUtil;
+import com.trifork.idwsxua.fmktestclient.util.XmlHelper;
+import dk.sds.samlh.model.provideridentifier.ProviderIdentifier;
+import dk.sds.samlh.model.resourceid.ResourceId;
+import org.apache.cxf.ws.security.tokenstore.SecurityToken;
+import org.apache.cxf.ws.security.trust.STSClient;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
+
+import java.security.KeyStore;
+import java.security.PrivateKey;
+import java.security.cert.X509Certificate;
 
 @Component
 public class TokenProvider {
 
-   /* private static final Logger logger = LogManager.getLogger(TokenProvider.class);
+   private static final Logger logger = LogManager.getLogger(TokenProvider.class);
 
-    private final XUASTSClient sts;
-    private final Properties configuration;
+    private final Properties properties;
 
-    private static final ThreadLocal<Object> tokenHolder = new ThreadLocal<>(); // Can be both a String (SAML XML) or a SecurityToken
-
-    private static final ThreadLocal<Assertion> assertionHolder = new ThreadLocal<>();
-
-    @Autowired
-    public TokenProvider(XUASTSClient sts, Properties configuration) {
-        this.sts = sts;
-        this.configuration = configuration;
+    public TokenProvider(Properties properties) {
+        this.properties = properties;
     }
 
-    public static Object getToken() {
-        return tokenHolder.get();
+    public void refreshBootstrapToken(STSClient stsBootstrap) throws Exception {
+        final KeyStore employeeKeystore = X509CertUtil.getKeyStoreFromResource("MOCES_cpr_gyldig.p12", "Test1234"); // TODO
+        X509Certificate employeeCertificate = (X509Certificate) employeeKeystore.getCertificate("1");
+        PrivateKey employeeKey = (PrivateKey) employeeKeystore.getKey("1", "Test1234".toCharArray());
+
+        final org.w3c.dom.Element actAs = new OpenSaml3TokenBuilder(employeeCertificate, employeeKey).buildToken();
+        TokenHolder.selfsigned = actAs;
+
+        SecurityToken securityToken = stsBootstrap.requestSecurityToken("http://sts.sundhedsdatastyrelsen.dk/");
+
+        TokenHolder.bst = securityToken.getToken();
+        System.out.println(XmlHelper.node2String(securityToken.getToken(), true, true));
+
+        SessionContextHolder.get().setIncludeDefaultClaims(true);
+        initPatientContext("541133", "2606767242");
     }
 
-    public void refreshBootstrapToken() {
-        final Object samlOrBootstrapToken = tokenHolder.get();
-
-        SecurityToken securityToken = null;
-        if (samlOrBootstrapToken instanceof SecurityToken) {
-            // Reuse existing Security token
-            securityToken = (SecurityToken) samlOrBootstrapToken;
-        }
-        if (securityToken == null || securityToken.isExpired()) {
-            // Security token is null or expired
-
-            final String samlToken = getSAMLToken();
-            tokenHolder.set(samlToken);
-
-            // perform a call to the STS to exchange the self-signed token into a "bootstrap"-token
-            SecurityToken newSecurityToken = null;
-            try {
-                logger.info("Requesting new bootstrap token");
-
-                sts.getClient().getRequestContext().put(Message.ENDPOINT_ADDRESS, "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee/bootstrap");
-
-                newSecurityToken = sts.requestSecurityToken("http://localhost:8080/service/hello");
-
-                sts.getClient().getRequestContext().put(Message.ENDPOINT_ADDRESS, "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee");
-
-            } catch (Exception e) {
-                logger.error("Error requesting security token", e);
-            }
-            tokenHolder.set(newSecurityToken);
-        }
+    private static ProviderIdentifier buildProviderIdentifier(String ydernummer) {
+        return ProviderIdentifier.builder()
+                .root("1.2.208.176.1.4")
+                .xsiType("II")
+                .extension(ydernummer + "^description")
+                .build();
     }
 
-    private String getSAMLToken() {
-        String result = null;
+    private static ResourceId buildResourceId(String cpr) {
+        return ResourceId.builder()
+                .oid("1.2.208.176.1.2")
+                .patientId(cpr)
+                .build();
+    }
 
-        // Get existing assertion
-        final Assertion currentAssertion = assertionHolder.get();
+    private void initPatientContext(String ydernummer, String patientCpr) {
+        ResourceId patientContext = buildResourceId(patientCpr);
+        SessionContextHolder.get().setResourceId(patientContext);
 
-        final DateTime now = new DateTime();
-        final DateTime notOnOrAfter = currentAssertion == null ? null : currentAssertion.getConditions().getNotOnOrAfter();
-
-        Assertion assertion;
-        try {
-            if (notOnOrAfter != null && notOnOrAfter.isBefore(now)) {
-                logger.info("Reusing SAML assertion");
-                assertion = currentAssertion;
-            } else {
-                logger.info("Building new SAML assertion");
-                assertion = new SAMLTokenBuilder().getAssertion(configuration.getKeystore(), configuration.getKeystore().aliases().nextElement(), configuration.getPrivateKeyPassword());
-            }
-
-            Marshaller marshaller = Configuration.getMarshallerFactory().getMarshaller(assertion);
-            marshaller.marshall(assertion);
-
-            Element plaintextElement = marshaller.marshall(assertion);
-
-            result = XMLHelper.nodeToString(plaintextElement);
-        } catch (MarshallingException e) {
-            logger.error("Mashalling SAML assertion failed", e);
-        } catch (KeyStoreException e) {
-            logger.error("KeyStore error", e);
-        }
-
-        return result;
-    }*/
+        ProviderIdentifier providerIdentifier = buildProviderIdentifier(ydernummer);
+        SessionContextHolder.get().setProviderIdentifier(providerIdentifier);
+    }
 }

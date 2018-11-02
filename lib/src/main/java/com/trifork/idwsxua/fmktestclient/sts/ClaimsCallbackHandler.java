@@ -14,15 +14,15 @@ import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.UnsupportedCallbackException;
 
 public class ClaimsCallbackHandler implements CallbackHandler {
+
     @Override
     public void handle(Callback[] callbacks) throws UnsupportedCallbackException {
-        for (int i = 0; i < callbacks.length; i++) {
-            if (callbacks[i] instanceof ClaimsCallback) {
-                ClaimsCallback callback = (ClaimsCallback) callbacks[i];
-                createClaims(callback);
-            }
-            else {
-                throw new UnsupportedCallbackException(callbacks[i], "Unrecognized Callback");
+        for (Callback callback : callbacks) {
+            if (callback instanceof ClaimsCallback) {
+                ClaimsCallback claimsCallback = (ClaimsCallback) callback;
+                createClaims(claimsCallback);
+            } else {
+                throw new UnsupportedCallbackException(callback, "Unrecognized Callback");
             }
         }
     }
@@ -68,7 +68,6 @@ public class ClaimsCallbackHandler implements CallbackHandler {
             throw new RuntimeException(e);
         }
     }
-
 
 
     private static void addClaim(Element claimsElement, String name, String value) {

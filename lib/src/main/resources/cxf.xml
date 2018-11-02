@@ -1,117 +1,111 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xmlns:context="http://www.springframework.org/schema/context"
-	   xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
-	   xmlns:cxf="http://cxf.apache.org/core"
-	   xmlns:sec="http://cxf.apache.org/configuration/security"
-	   xmlns:jaxws="http://cxf.apache.org/jaxws"
-	   xsi:schemaLocation="
-        http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd
- http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:cxf="http://cxf.apache.org/core"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
         http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
-        http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
-        http://cxf.apache.org/transports/http/configuration
-        http://cxf.apache.org/schemas/configuration/http-conf.xsd">
+        http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 
-	<http-conf:conduit name="*">
-		<http-conf:tlsClientParameters>
-			<sec:trustManagers>
-				<sec:keyStore type="JKS" file="C:\Users\Jonathan\Trifork\idws-xua\fmktestclient\lib\src\main\resources\ssl-trust.jks" password="Test1234" />
-			</sec:trustManagers>
-		</http-conf:tlsClientParameters>
-	</http-conf:conduit>
-
-	<jaxws:client name="{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}EmployeeBootstrap" createdFromAPI="true" address="https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee/bootstrap">
-		<jaxws:properties>
-			<entry key="ws-security.signature.username" value="idws xua test wsc (funktionscertifikat)" />
-			<entry key="ws-security.signature.properties" value="sts-client.properties" />
-			<entry key="ws-security.callback-handler" value="com.trifork.idwsxua.fmktestclient.sts.ClientCallbackHandler" />
-			<entry key="ws-security.asymmetric.signature.algorithm" value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" />
-		</jaxws:properties>
-	</jaxws:client>
-
-	<jaxws:client name="{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}Employee" createdFromAPI="true" address="https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee">
-		<jaxws:properties>
-			<entry key="ws-security.signature.username" value="idws xua test wsc (funktionscertifikat)" />
-			<entry key="ws-security.signature.properties" value="sts-client.properties" />
-			<entry key="ws-security.callback-handler" value="com.trifork.idwsxua.fmktestclient.sts.ClientCallbackHandler" />
-			<entry key="ws-security.asymmetric.signature.algorithm" value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" />
-		</jaxws:properties>
-	</jaxws:client>
+    <!--<http-conf:conduit name="*">
+        <http-conf:tlsClientParameters>
+            <sec:trustManagers>
+                <sec:keyStore type="JKS" file="ssl-trust.jks" password="Test1234" />
+            </sec:trustManagers>
+        </http-conf:tlsClientParameters>
+    </http-conf:conduit>-->
 
     <cxf:bus name="cxf" id="cxf">
     </cxf:bus>
 
-	<bean id="bootstrapClient" class="com.trifork.idwsxua.fmktestclient.sts.XUASTSClient">
-		<constructor-arg ref="cxf" />
+    <jaxws:client name="{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}EmployeeBootstrap" createdFromAPI="true" address="https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee/bootstrap">
+        <jaxws:properties>
+            <entry key="ws-security.signature.username" value="idws xua test wsc (funktionscertifikat)"/>
+            <entry key="ws-security.signature.properties" value="sts-client.properties"/>
+            <entry key="ws-security.callback-handler" value="com.trifork.idwsxua.fmktestclient.sts.ClientCallbackHandler"/>
+            <entry key="ws-security.asymmetric.signature.algorithm" value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+        </jaxws:properties>
+    </jaxws:client>
 
-		<property name="wsdlLocation" value="https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee/bootstrap?wsdl" />
-		<property name="serviceName" value="{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}SecurityTokenService" />
-		<property name="endpointName" value="{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}EmployeeBootstrap" />
-		<property name="sendRenewing" value="false" />
-		<property name="sendKeyType" value="false" />
-		<property name="requiresEntropy" value="false" />
-		<property name="tokenType" value="http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0" />
-		<property name="actAs">
-			<bean class="com.trifork.idwsxua.fmktestclient.sts.ActAsSelfsignedCallbackHandler" />
-		</property>
-		<property name="keyType" value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/PublicKey" />
-		<property name="useCertificateForConfirmationKeyInfo" value="true" />
-		<!--<property name="claimsCallbackHandler">-->
-			<!--<bean class="com.trifork.idwsxua.fmktestclient.sts.ClaimsCallbackHandler" />-->
-		<!--</property>-->
+    <jaxws:client name="{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}Employee" createdFromAPI="true" address="https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee">
+        <jaxws:properties>
+            <entry key="ws-security.signature.username" value="idws xua test wsc (funktionscertifikat)"/>
+            <entry key="ws-security.signature.properties" value="sts-client.properties"/>
+            <entry key="ws-security.callback-handler" value="com.trifork.idwsxua.fmktestclient.sts.ClientCallbackHandler"/>
+            <entry key="ws-security.asymmetric.signature.algorithm" value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+        </jaxws:properties>
+    </jaxws:client>
 
-		<property name="properties">
-			<map>
-				<!-- this is used to sign the request to the STS -->
-				<entry key="ws-security.callback-handler" value="com.trifork.idwsxua.fmktestclient.sts.ClientCallbackHandler" />
-				<!--<entry key="ws-security.signature.username" value="idws xua test wsc (funktionscertifikat)" />-->
-				<entry key="ws-security.signature.properties" value="sts-client.properties" />
+    <bean id="bootstrapClient" class="com.trifork.idwsxua.fmktestclient.sts.XUASTSClient">
+        <constructor-arg ref="cxf"/>
 
-				<!-- this is used to verify the signature on the response from the STS -->
-				<entry key="ws-security.encryption.username" value="sts" />
-				<!--<entry key="ws-security.encryption.properties" value="sts-client.properties" />-->
+        <property name="wsdlLocation" value="https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee/bootstrap?wsdl"/>
+        <property name="serviceName" value="{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}SecurityTokenService"/>
+        <property name="endpointName" value="{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}EmployeeBootstrap"/>
+        <property name="sendRenewing" value="false"/>
+        <property name="sendKeyType" value="false"/>
+        <property name="requiresEntropy" value="false"/>
+        <property name="tokenType" value="http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0"/>
+        <property name="actAs">
+            <bean class="com.trifork.idwsxua.fmktestclient.sts.ActAsSelfsignedCallbackHandler"/>
+        </property>
+        <property name="keyType" value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/PublicKey"/>
+        <property name="useCertificateForConfirmationKeyInfo" value="true"/>
+        <!--<property name="claimsCallbackHandler">-->
+        <!--<bean class="com.trifork.idwsxua.fmktestclient.sts.ClaimsCallbackHandler" />-->
+        <!--</property>-->
 
-				<entry key="ws-security.sts.token.properties" value="sts-client.properties"/>
-				<entry key="ws-security.asymmetric.signature.algorithm" value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" />
-			</map>
-		</property>
-	</bean>
+        <property name="properties">
+            <map>
+                <!-- this is used to sign the request to the STS -->
+                <entry key="ws-security.callback-handler" value="com.trifork.idwsxua.fmktestclient.sts.ClientCallbackHandler"/>
+                <!--<entry key="ws-security.signature.username" value="idws xua test wsc (funktionscertifikat)" />-->
+                <entry key="ws-security.signature.properties" value="sts-client.properties"/>
 
-	<bean id="employeeClient" class="com.trifork.idwsxua.fmktestclient.sts.XUASTSClient">
-		<constructor-arg ref="cxf" />
+                <!-- this is used to verify the signature on the response from the STS -->
+                <entry key="ws-security.encryption.username" value="sts"/>
+                <!--<entry key="ws-security.encryption.properties" value="sts-client.properties" />-->
 
-		<property name="wsdlLocation" value="https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee?wsdl" />
-		<property name="serviceName" value="{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}SecurityTokenService" />
-		<property name="endpointName" value="{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}EmployeeBootstrap" />
-		<property name="sendRenewing" value="false" />
-		<property name="sendKeyType" value="false" />
-		<property name="requiresEntropy" value="false" />
-		<property name="tokenType" value="http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0" />
-		<property name="actAs">
-			<bean class="com.trifork.idwsxua.fmktestclient.sts.ActAsBootstrapCallbackHandler" />
-		</property>
-		<property name="claimsCallbackHandler">
-			<bean class="com.trifork.idwsxua.fmktestclient.sts.ClaimsCallbackHandler" />
-		</property>
-		<property name="keyType" value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/PublicKey" />
+                <entry key="ws-security.sts.token.properties" value="sts-client.properties"/>
+                <entry key="ws-security.asymmetric.signature.algorithm" value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+            </map>
+        </property>
+    </bean>
 
-		<property name="properties">
-			<map>
-				<!-- this is used to sign the request to the STS -->
-				<entry key="ws-security.callback-handler" value="com.trifork.idwsxua.fmktestclient.sts.ClientCallbackHandler" />
-				<entry key="ws-security.signature.username" value="idws xua test wsc (funktionscertifikat)" />
-				<entry key="ws-security.signature.properties" value="sts-client.properties" />
+    <bean id="employeeClient" class="com.trifork.idwsxua.fmktestclient.sts.XUASTSClient">
+        <constructor-arg ref="cxf"/>
 
-				<!-- this is used to verify the signature on the response from the STS -->
-				<entry key="ws-security.encryption.username" value="sts" />
-				<entry key="ws-security.encryption.properties" value="sts-client.properties" />
+        <property name="wsdlLocation" value="https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee?wsdl"/>
+        <property name="serviceName" value="{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}SecurityTokenService"/>
+        <property name="endpointName" value="{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}EmployeeBootstrap"/>
+        <property name="sendRenewing" value="false"/>
+        <property name="sendKeyType" value="false"/>
+        <property name="requiresEntropy" value="false"/>
+        <property name="tokenType" value="http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0"/>
+        <property name="actAs">
+            <bean class="com.trifork.idwsxua.fmktestclient.sts.ActAsBootstrapCallbackHandler"/>
+        </property>
+        <property name="claimsCallbackHandler">
+            <bean class="com.trifork.idwsxua.fmktestclient.sts.ClaimsCallbackHandler"/>
+        </property>
+        <property name="keyType" value="http://docs.oasis-open.org/ws-sx/ws-trust/200512/PublicKey"/>
 
-				<entry key="ws-security.sts.token.properties" value="sts-client.properties"/>
-				<entry key="ws-security.asymmetric.signature.algorithm" value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" />
+        <property name="properties">
+            <map>
+                <!-- this is used to sign the request to the STS -->
+                <entry key="ws-security.callback-handler" value="com.trifork.idwsxua.fmktestclient.sts.ClientCallbackHandler"/>
+                <entry key="ws-security.signature.username" value="idws xua test wsc (funktionscertifikat)"/>
+                <entry key="ws-security.signature.properties" value="sts-client.properties"/>
 
-				<!--<entry key="ws-security.timestamp.futureTimeToLive" value="60" />-->
-			</map>
-		</property>
-	</bean>
+                <!-- this is used to verify the signature on the response from the STS -->
+                <entry key="ws-security.encryption.username" value="sts"/>
+                <entry key="ws-security.encryption.properties" value="sts-client.properties"/>
+
+                <entry key="ws-security.sts.token.properties" value="sts-client.properties"/>
+                <entry key="ws-security.asymmetric.signature.algorithm" value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+
+                <!--<entry key="ws-security.timestamp.futureTimeToLive" value="60" />-->
+            </map>
+        </property>
+    </bean>
 </beans>

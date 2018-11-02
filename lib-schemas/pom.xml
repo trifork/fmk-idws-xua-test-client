@@ -33,9 +33,23 @@
                             <wsdlOptions>
                                 <wsdlOption>
                                     <wsdl>
-                                        ${basedir}/src/main/resources/wsdl/MedicineCard_Idws_2015_01_01.wsdl
+                                        ${basedir}/src/main/resources/wsdl/MedicineCard_Idws_Xua_2015_01_01.wsdl
                                     </wsdl>
-                                    <wsdlLocation>classpath:wsdl/MedicineCard_Idws_2015_01_01.wsdl</wsdlLocation>
+                                    <wsdlLocation>classpath:wsdl/MedicineCard_Idws_Xua_2015_01_01.wsdl</wsdlLocation>
+                                    <extraargs>
+                                        <extraarg>-p</extraarg>
+                                        <extraarg>dk.dkma.medicinecard.xml_schema._2015._01._01</extraarg>
+                                    </extraargs>
+                                </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>
+                                        ${basedir}/src/main/resources/wsdl/MedicineCard_Idws_Xua_2015_01_01_E1.wsdl
+                                    </wsdl>
+                                    <wsdlLocation>classpath:wsdl/MedicineCard_Idws_Xua_2015_01_01_E1.wsdl</wsdlLocation>
+                                    <extraargs>
+                                        <extraarg>-p</extraarg>
+                                        <extraarg>dk.dkma.medicinecard.xml_schema._2015._01._01._e1</extraarg>
+                                    </extraargs>
                                 </wsdlOption>
                             </wsdlOptions>
                         </configuration>
