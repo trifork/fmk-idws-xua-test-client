@@ -2,24 +2,26 @@ package com.trifork.idwsxua.fmktestclient.sts.client;
 
 import com.trifork.idwsxua.fmktestclient.sts.ActAsSelfsignedCallbackHandler;
 import com.trifork.idwsxua.fmktestclient.sts.ClientCallbackHandler;
-import com.trifork.idwsxua.fmktestclient.sts.XUASTSClient;
+import com.trifork.idwsxua.fmktestclient.util.Properties;
 import org.apache.cxf.Bus;
 import org.apache.cxf.BusFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class BootstrapClient implements STSClientWrapper{
+public class BootstrapClient implements STSClientWrapper {
 
     private final XUASTSClient client;
 
-    public BootstrapClient() {
+    @Autowired
+    public BootstrapClient(Properties properties) {
         Bus defaultBus = BusFactory.getDefaultBus();
         client = new XUASTSClient(defaultBus);
 
-        client.setWsdlLocation("https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee/bootstrap?wsdl");
+        client.setWsdlLocation(properties.getStsWsdl());
         client.setServiceName("{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}SecurityTokenService");
         client.setEndpointName("{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}EmployeeBootstrap");
         client.setSendRenewing(false);
@@ -31,13 +33,13 @@ public class BootstrapClient implements STSClientWrapper{
         client.setKeyType("http://docs.oasis-open.org/ws-sx/ws-trust/200512/PublicKey");
         client.setUseCertificateForConfirmationKeyInfo(true);
 
-        Map<String, Object> properties = new HashMap<>();
-        properties.put("ws-security.callback-handler", new ClientCallbackHandler());
-        properties.put("ws-security.signature.properties", "sts-client.properties");
-        properties.put("ws-security.encryption.username", "sts");
-        properties.put("ws-security.sts.token.properties", "sts-client.properties");
-        properties.put("ws-security.asymmetric.signature.algorithm", "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256");
-        client.setProperties(properties);
+        Map<String, Object> propertiesMap = new HashMap<>();
+        propertiesMap.put("ws-security.callback-handler", new ClientCallbackHandler());
+        propertiesMap.put("ws-security.signature.properties", "sts-client.properties");
+        propertiesMap.put("ws-security.encryption.username", "sts");
+        propertiesMap.put("ws-security.sts.token.properties", "sts-client.properties");
+        propertiesMap.put("ws-security.asymmetric.signature.algorithm", "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256");
+        client.setProperties(propertiesMap);
     }
 
     @Override

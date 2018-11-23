@@ -1,4 +1,4 @@
-package com.trifork.idwsxua.fmktestclient.sts;
+package com.trifork.idwsxua.fmktestclient.sts.client;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.cxf.Bus;

@@ -1,6 +1,6 @@
 package com.trifork.idwsxua.fmktestclient;
 
-import com.trifork.idwsxua.fmktestclient.client.Client;
+import com.trifork.idwsxua.fmktestclient.client.MedicineCardClient;
 import com.trifork.idwsxua.fmktestclient.client.MedicineCard_2015_01_01;
 import com.trifork.idwsxua.fmktestclient.client.MedicineCard_2015_01_01_E1;
 import com.trifork.idwsxua.fmktestclient.util.Properties;
@@ -48,11 +48,8 @@ public class ApplicationRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        // Command line argument parsing
         CmdLineParser parser = new CmdLineParser(this);
-
-        // For arguments without key
-        //logger.info("args: " + Arrays.toString(args));
-
         try {
             // parse the arguments
             parser.parseArgument(args);
@@ -62,6 +59,8 @@ public class ApplicationRunner implements CommandLineRunner {
                 // print the list of available options
                 parser.printUsage(System.err);
                 System.err.println();
+
+                // Quit
                 return;
             }
         } catch (CmdLineException e) {
@@ -73,25 +72,24 @@ public class ApplicationRunner implements CommandLineRunner {
             parser.printUsage(System.err);
             System.err.println();
 
+            // Quit
             return;
         }
 
         // Starting app
         logger.info("Starting FMK Test Client...");
 
-        // Update properties class
+        // Update properties class with command line arguments
         properties.setWebserviceEndpoint(webserviceEndpoint);
-        properties.setApiVersion(apiVersion);
-        properties.setPersonIdentifier(personIdentifier);
 
-        // Create a client
-        final Client client;
+        // Create a MedicineCardClient
+        final MedicineCardClient medicineCardClient;
         switch (apiVersion) {
             case "MedicineCard_2015_01_01":
-                client = applicationContext.getBean(MedicineCard_2015_01_01.class);
+                medicineCardClient = applicationContext.getBean(MedicineCard_2015_01_01.class);
                 break;
             case "MedicineCard_2015_01_01_E1":
-                client = applicationContext.getBean(MedicineCard_2015_01_01_E1.class);
+                medicineCardClient = applicationContext.getBean(MedicineCard_2015_01_01_E1.class);
                 break;
             default:
                 throw new IllegalArgumentException("Unrecognized api version");
@@ -99,13 +97,14 @@ public class ApplicationRunner implements CommandLineRunner {
 
         for (int i = 1; i <= repeat; i++) {
             logger.info("--- Call count: " + i + " ---");
-            client.callService(personIdentifier);
+            final String response = medicineCardClient.getMedicineCard(personIdentifier);
+            logger.info("WSP response:");
+            logger.info(response);
             if (i < repeat) {
-                // Don't sleep in last round
+                // "<" means do not sleep in last round
                 Thread.sleep(ms);
             }
         }
     }
-
 
 }

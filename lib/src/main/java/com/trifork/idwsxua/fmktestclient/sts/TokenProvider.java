@@ -1,9 +1,6 @@
-package com.trifork.idwsxua.fmktestclient.security;
+package com.trifork.idwsxua.fmktestclient.sts;
 
 
-import com.trifork.idwsxua.fmktestclient.sts.OpenSaml3TokenBuilder;
-import com.trifork.idwsxua.fmktestclient.sts.SessionContextHolder;
-import com.trifork.idwsxua.fmktestclient.sts.TokenHolder;
 import com.trifork.idwsxua.fmktestclient.util.Properties;
 import com.trifork.idwsxua.fmktestclient.util.X509CertUtil;
 import dk.sds.samlh.model.provideridentifier.ProviderIdentifier;

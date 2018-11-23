@@ -1,4 +1,4 @@
-package com.trifork.idwsxua.fmktestclient.callback;
+package com.trifork.idwsxua.fmktestclient.util;
 
 import org.apache.wss4j.common.ext.WSPasswordCallback;
 

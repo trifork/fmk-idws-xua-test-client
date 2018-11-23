@@ -8,7 +8,6 @@ import org.springframework.context.annotation.ImportResource;
 
 @Configuration
 @ComponentScan
-@ImportResource({"classpath:cxf.xml"})
 public class IDWSXUALibSpringConfiguration {
 
     private static final Logger logger = LogManager.getLogger(IDWSXUALibSpringConfiguration.class);
