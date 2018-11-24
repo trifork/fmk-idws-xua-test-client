@@ -3,6 +3,7 @@ package com.trifork.idwsxua.fmktestclient.sts;
 import dk.sds.samlh.model.onbehalfof.OnBehalfOf;
 import dk.sds.samlh.model.provideridentifier.ProviderIdentifier;
 import dk.sds.samlh.model.resourceid.ResourceId;
+import dk.sds.samlh.model.role.Role;
 
 public class SessionContext {
 	private ResourceId resourceId;
@@ -10,6 +11,7 @@ public class SessionContext {
 	private OnBehalfOf onBehalfOf;
 	private String educationCode;
     private boolean includeDefaultClaims;
+    private Role role;
 
 
     public ResourceId getResourceId() {
@@ -50,5 +52,13 @@ public class SessionContext {
 
     public void setIncludeDefaultClaims(boolean includeDefaultClaims) {
         this.includeDefaultClaims = includeDefaultClaims;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+    
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

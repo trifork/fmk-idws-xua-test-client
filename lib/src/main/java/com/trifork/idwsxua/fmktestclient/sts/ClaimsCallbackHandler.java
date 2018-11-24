@@ -44,7 +44,7 @@ public class ClaimsCallbackHandler implements CallbackHandler {
             doc.appendChild(claimsElement);
 
             if (context.isIncludeDefaultClaims()) {
-                addClaim(claimsElement, "dk:healthcare:saml:attribute:SystemVersion", "0.1");
+                addClaim(claimsElement, "dk:healthcare:saml:attribute:SystemVersion", "1.5");
                 addClaim(claimsElement, "dk:healthcare:saml:attribute:SystemName", "test-client");
                 addClaim(claimsElement, "dk:healthcare:saml:attribute:SystemUsingOrganisationName", "Region Test");
                 addClaim(claimsElement, "urn:oid:2.5.4.10", "Syfilis klinikken");
@@ -61,6 +61,13 @@ public class ClaimsCallbackHandler implements CallbackHandler {
             }
             if (context.getEducationCode() != null) {
                 addClaim(claimsElement, "dk:healthcare:saml:attribute:UserEducationCode", context.getEducationCode());
+            }
+            if (context.getRole() != null) {
+                Element roleElement = context.getRole().generateElement(Validate.YES);
+                
+                // TODO: When STS is fixed, do this instead:
+                // addClaim(claimsElement, "urn:oasis:names:tc:xacml:2.0:subject:role", roleElement);
+                addClaim(claimsElement, "urn:oasis:names:tc:xspa:1.0:subject:role", roleElement);
             }
 
             callback.setClaims(claimsElement);

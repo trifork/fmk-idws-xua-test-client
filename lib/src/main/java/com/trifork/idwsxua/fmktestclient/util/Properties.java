@@ -17,6 +17,16 @@ public class Properties {
     private STSBootstrap stsBootstrap = new STSBootstrap();
     private STSIdentity stsIdentity = new STSIdentity();
 
+    private int repeats;
+
+    private int repeatDelayMs;
+    private String role;
+    private String onBehalfOfAuth;
+    private String onBehalfOfCpr;
+    private String educationCode;
+    private String personIdentifier;
+    private String apiVersion;
+
     public String getKeystoreFile() {
         return keystoreFile;
     }
@@ -57,6 +67,14 @@ public class Properties {
         this.webserviceEndpoint = webserviceEndpoint;
     }
 
+    public String getApiVersion() {
+        return apiVersion;
+    }
+
+    public void setApiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
+    }
+
     public STSBootstrap getStsBootstrap() {
         return stsBootstrap;
     }
@@ -71,6 +89,62 @@ public class Properties {
 
     public void setStsIdentity(STSIdentity stsIdentity) {
         this.stsIdentity = stsIdentity;
+    }
+    
+    public String getPersonIdentifier() {
+        return personIdentifier;
+    }
+
+    public void setPersonIdentifier(String personIdentifier) {
+        this.personIdentifier = personIdentifier;
+    }
+    
+    public int getRepeats() {
+        return repeats;
+    }
+    
+    public void setRepeats(int repeats) {
+        this.repeats = repeats;
+    }
+
+    public int getRepeatDelayMs() {
+        return repeatDelayMs;
+    }
+
+    public void setRepeatDelayMs(int repeatDelayMs) {
+        this.repeatDelayMs = repeatDelayMs;
+    }
+
+    public String getRole() {
+        return role;
+    }
+    
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getOnBehalfOfAuth() {
+        return onBehalfOfAuth;
+    }
+    
+    public void setOnBehalfOfAuth(String onBehalfOfAuth) {
+        this.onBehalfOfAuth = onBehalfOfAuth;
+    }
+
+    public String getOnBehalfOfCpr() {
+        return onBehalfOfCpr;
+    }
+    
+    public void setOnBehalfOfCpr(String onBehalfOfCpr) {
+        this.onBehalfOfCpr = onBehalfOfCpr;
+    }
+
+    public String getEducationCode() {
+        return educationCode;
+    }
+    
+    public void setEducationCode(String educationCode) {
+        this.educationCode = educationCode;
     }
 
     public class STSBootstrap {
@@ -114,4 +188,5 @@ public class Properties {
             this.audience = audience;
         }
     }
+
 }
