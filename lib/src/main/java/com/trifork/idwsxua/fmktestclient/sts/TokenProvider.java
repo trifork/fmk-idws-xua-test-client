@@ -74,7 +74,7 @@ public class TokenProvider {
             // logger.debug(XmlHelper.node2String(bootstrapToken.getToken(), true, true));
 
             SessionContextHolder.get().setIncludeDefaultClaims(true);
-            initPatientContext("541133", "2606767242");
+            initPatientContext("541133", properties.getPersonIdentifier());
         } else {
             logger.info("Reusing bootstrap token");
         }
