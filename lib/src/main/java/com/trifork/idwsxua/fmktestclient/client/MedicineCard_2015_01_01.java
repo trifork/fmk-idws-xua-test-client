@@ -14,6 +14,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 @Component
 public class MedicineCard_2015_01_01 extends MedicineCardClient {
@@ -28,7 +30,7 @@ public class MedicineCard_2015_01_01 extends MedicineCardClient {
     public MedicineCard_2015_01_01(Properties properties,
                                    @Qualifier("bootstrapClient") STSClientWrapper stsBootstrap,
                                    @Qualifier("employeeClient") STSClientWrapper stsIdentity,
-                                   TokenProvider tokenProvider) throws JAXBException {
+                                   TokenProvider tokenProvider) throws JAXBException, IOException, URISyntaxException {
         super(properties, stsBootstrap, stsIdentity, tokenProvider);
     }
 

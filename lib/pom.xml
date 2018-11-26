@@ -20,6 +20,11 @@
             <id>NSP Nexus</id>
             <url>https://nexus.nspop.dk/nexus/content/groups/public</url>
         </repository>
+        <!-- Trifork Nexus - TODO: To be removed when saml-h-util dependency has been published to NSP Nexus -->
+        <repository>
+            <id>Trifork Nexus</id>
+            <url>http://ci.fmk.netic.dk/nexus/content/repositories/releases/</url>
+        </repository>
     </repositories>
 
     <dependencies>

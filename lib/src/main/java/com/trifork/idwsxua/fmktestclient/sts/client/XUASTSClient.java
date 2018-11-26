@@ -25,6 +25,7 @@ public class XUASTSClient extends STSClient {
     public XUASTSClient(Bus b) {
         super(b);
 
+        // Request/response logging
         getOutInterceptors().add(new LoggingOutInterceptor());
         getInInterceptors().add(new LoggingInInterceptor());
     }

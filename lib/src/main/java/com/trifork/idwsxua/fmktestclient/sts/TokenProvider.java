@@ -64,9 +64,11 @@ public class TokenProvider {
         if (bootstrapToken == null || bootstrapToken.isExpired()) {
             // Bootstrap token is null or expired
 
+            // Refresh SAML Assertion if needed
             refreshSAMLAssertion();
 
-            SecurityToken newBootstrapToken = stsBootstrap.requestSecurityToken("http://sts.sundhedsdatastyrelsen.dk/");
+            // Get new bootstrap token
+            SecurityToken newBootstrapToken = stsBootstrap.requestSecurityToken(properties.getStsBootstrap().getAudience());
             TokenHolder.bootstrapToken = newBootstrapToken;
             TokenHolder.bootstrapTokenElement = newBootstrapToken.getToken();
 
@@ -75,8 +77,6 @@ public class TokenProvider {
 
             SessionContextHolder.get().setIncludeDefaultClaims(true);
             initPatientContext("541133", properties.getPersonIdentifier());
-        } else {
-            logger.info("Reusing bootstrap token");
         }
     }
 
