@@ -15,6 +15,18 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <repositories>
+        <repository>
+            <id>NSP Nexus</id>
+            <url>https://nexus.nspop.dk/nexus/content/groups/public</url>
+        </repository>
+        <!-- Trifork Nexus - TODO: To be removed when saml-h-util dependency has been published to NSP Nexus -->
+        <repository>
+            <id>Trifork Nexus</id>
+            <url>http://ci.fmk.netic.dk/nexus/content/repositories/releases/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <!-- Spring Boot -->
         <!-- Should resolve versions based on parent project -->
@@ -59,11 +71,11 @@
         </dependency>
 
         <!-- cxf and oiosaml use different versions of this dependency, so we explicitly set the one that works -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.santuario</groupId>
             <artifactId>xmlsec</artifactId>
             <version>2.0.8</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>commons-io</groupId>
@@ -72,15 +84,9 @@
         </dependency>
 
         <dependency>
-            <groupId>dk.digst</groupId>
-            <artifactId>oiosaml2.java</artifactId>
-            <version>2.0.8</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>log4j</groupId>
-                    <artifactId>log4j</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>dk.sds.xua</groupId>
+            <artifactId>saml-h-util</artifactId>
+            <version>1.0.1</version>
         </dependency>
 
         <dependency>

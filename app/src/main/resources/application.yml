@@ -3,8 +3,25 @@ spring:
     web-application-type: "none"
     banner-mode: "off"
 
-idwsxua:
-  keystoreFile: "test-moces.pfx"
-  keystorePassword: "Test1234"
-  privateKeyPassword: "Test1234"
-
+fmkclient:
+  keystoreFile: MOCES_cpr_gyldig.p12
+  keystorePassword: Test1234
+  privateKeyPassword: Test1234
+  stsWsdl: "classpath:sts.wsdl"
+  #stsWsdl: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee?wsdl"
+  #stsWsdl: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee/bootstrap?wsdl"
+  webserviceEndpoint: "http://wsp-idws-xua:8444/HelloWorld/services/helloworld"
+  apiVersion: MedicineCard_2015_01_01_E1
+  repeats: 1
+  repeatDelayMs: 0
+  personIdentifier: "1111111111"
+  educationCode: "7170"
+  role: Læge
+  stsBootstrap:
+    endpoint: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee/bootstrap"
+    #endpoint: "http://sts-idws-xua:8181/service/sts"
+    audience: "http://sts.sundhedsdatastyrelsen.dk/"
+  stsIdentity:
+    endpoint: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee"
+    #endpoint: "http://sts-idws-xua:8181/service/sts"
+    audience: "https://fmk"

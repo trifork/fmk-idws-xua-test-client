@@ -70,11 +70,11 @@
         </dependency>
 
         <!-- cxf and oiosaml use different versions of this dependency, so we explicitly set the one that works -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.santuario</groupId>
             <artifactId>xmlsec</artifactId>
             <version>2.0.8</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>com.trifork.idws-xua</groupId>
@@ -86,6 +86,12 @@
             <groupId>args4j</groupId>
             <artifactId>args4j</artifactId>
             <version>2.33</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

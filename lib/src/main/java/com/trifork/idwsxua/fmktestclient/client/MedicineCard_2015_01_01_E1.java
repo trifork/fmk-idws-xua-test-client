@@ -3,7 +3,7 @@ package com.trifork.idwsxua.fmktestclient.client;
 import com.trifork.idwsxua.fmktestclient.sts.TokenProvider;
 import com.trifork.idwsxua.fmktestclient.sts.client.STSClientWrapper;
 import com.trifork.idwsxua.fmktestclient.util.Properties;
-import dk.dkma.medicinecard.xml_schema._2015._01._01.*;
+import dk.dkma.medicinecard.xml_schema._2015._01._01._e1.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +18,19 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 @Component
-public class MedicineCard_2015_01_01 extends MedicineCardClient {
+public class MedicineCard_2015_01_01_E1 extends MedicineCardClient {
 
-    private static final Logger logger = LogManager.getLogger(MedicineCardClient.class);
+    private static final Logger logger = LogManager.getLogger(MedicineCard_2015_01_01_E1.class);
 
     private final MedicineCardPortType port = new MedicineCardService().getMedicineCardPort();
     private final ObjectFactory objectFactory = new ObjectFactory();
     private final Marshaller marshaller = medicineCardMarshaller();
 
     @Autowired
-    public MedicineCard_2015_01_01(Properties properties,
-                                   @Qualifier("bootstrapClient") STSClientWrapper stsBootstrap,
-                                   @Qualifier("employeeClient") STSClientWrapper stsIdentity,
-                                   TokenProvider tokenProvider) throws JAXBException, IOException, URISyntaxException {
+    public MedicineCard_2015_01_01_E1(Properties properties,
+                                      @Qualifier("bootstrapClient") STSClientWrapper stsBootstrap,
+                                      @Qualifier("employeeClient") STSClientWrapper stsIdentity,
+                                      TokenProvider tokenProvider) throws JAXBException, IOException, URISyntaxException {
         super(properties, stsBootstrap, stsIdentity, tokenProvider);
     }
 
@@ -42,10 +42,10 @@ public class MedicineCard_2015_01_01 extends MedicineCardClient {
         GetMedicineCardRequestType requestType = new GetMedicineCardRequestType();
         requestType.setPersonIdentifier(personIdentifier);
 
-        GetMedicineCardResponseType response = port.getMedicineCard20150101(requestType);
-        JAXBElement<GetMedicineCardResponseType> responseJaxbElement = objectFactory.createGetMedicineCardResponse(response);
+        GetMedicineCardResponseType response = port.getMedicineCard20150101E1(requestType);
+        JAXBElement<GetMedicineCardResponseType> jaxbElement = objectFactory.createGetMedicineCardResponse(response);
 
-        return getResponseString(responseJaxbElement, marshaller);
+        return getResponseString(jaxbElement, marshaller);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class MedicineCard_2015_01_01 extends MedicineCardClient {
     }
 
     private Marshaller medicineCardMarshaller() throws JAXBException {
-        JAXBContext jaxbContext = JAXBContext.newInstance("dk.dkma.medicinecard.xml_schema._2015._01._01");
+        JAXBContext jaxbContext = JAXBContext.newInstance("dk.dkma.medicinecard.xml_schema._2015._01._01._e1");
         Marshaller marshaller = jaxbContext.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
