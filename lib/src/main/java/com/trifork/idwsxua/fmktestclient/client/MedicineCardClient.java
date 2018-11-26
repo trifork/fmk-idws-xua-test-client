@@ -1,17 +1,18 @@
 package com.trifork.idwsxua.fmktestclient.client;
 
-import com.trifork.idwsxua.fmktestclient.util.KeystorePasswordCallback;
-import com.trifork.idwsxua.fmktestclient.sts.TokenProvider;
 import com.trifork.idwsxua.fmktestclient.sts.SessionContext;
 import com.trifork.idwsxua.fmktestclient.sts.SessionContextHolder;
-import com.trifork.idwsxua.fmktestclient.sts.client.XUASTSClient;
+import com.trifork.idwsxua.fmktestclient.sts.TokenProvider;
 import com.trifork.idwsxua.fmktestclient.sts.client.STSClientWrapper;
+import com.trifork.idwsxua.fmktestclient.sts.client.XUASTSClient;
+import com.trifork.idwsxua.fmktestclient.util.KeystorePasswordCallback;
 import com.trifork.idwsxua.fmktestclient.util.Properties;
 import org.apache.cxf.message.Message;
 import org.apache.cxf.phase.AbstractPhaseInterceptor;
 import org.apache.cxf.phase.Phase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.core.io.ClassPathResource;
 
 import javax.annotation.PostConstruct;
 import javax.xml.bind.JAXBElement;
@@ -19,10 +20,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.ws.BindingProvider;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringWriter;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Map;
 
 public abstract class MedicineCardClient {
@@ -38,14 +37,18 @@ public abstract class MedicineCardClient {
     MedicineCardClient(Properties properties,
                        STSClientWrapper stsBootstrap,
                        STSClientWrapper stsIdentity,
-                       TokenProvider tokenProvider) throws URISyntaxException, IOException {
+                       TokenProvider tokenProvider) throws IOException {
         this.properties = properties;
         this.stsBootstrap = stsBootstrap.getClient();
         this.stsIdentity = stsIdentity.getClient();
         this.tokenProvider = tokenProvider;
 
         wss4jProperties = new java.util.Properties();
-        wss4jProperties.load(Files.newBufferedReader(Paths.get(getClass().getResource("/sts-client.properties").toURI())));
+        final ClassPathResource classPathResource = new ClassPathResource("sts-client.properties");
+        // Auto close stream using try-with-resources
+        try (InputStream inputStream = classPathResource.getInputStream()) {
+            wss4jProperties.load(inputStream);
+        }
 
         SessionContext context = new SessionContext();
         SessionContextHolder.set(context);
