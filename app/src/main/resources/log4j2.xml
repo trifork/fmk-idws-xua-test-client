@@ -27,7 +27,7 @@
         </Logger>
 
         <Logger name="com.trifork.idwsxua.fmktestclient" additivity="false">
-            <AppenderRef ref="Console" level="DEBUG"/>
+            <AppenderRef ref="Console" level="INFO"/>
             <AppenderRef ref="File" level="DEBUG"/>
         </Logger>
 
