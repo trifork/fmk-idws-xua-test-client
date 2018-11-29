@@ -7,6 +7,10 @@ import com.trifork.idwsxua.fmktestclient.sts.client.STSClientWrapper;
 import com.trifork.idwsxua.fmktestclient.sts.client.XUASTSClient;
 import com.trifork.idwsxua.fmktestclient.util.KeystorePasswordCallback;
 import com.trifork.idwsxua.fmktestclient.util.Properties;
+import org.apache.cxf.endpoint.Client;
+import org.apache.cxf.frontend.ClientProxy;
+import org.apache.cxf.interceptor.LoggingInInterceptor;
+import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.message.Message;
 import org.apache.cxf.phase.AbstractPhaseInterceptor;
 import org.apache.cxf.phase.Phase;
@@ -76,6 +80,11 @@ public abstract class MedicineCardClient {
         BindingProvider provider = (BindingProvider) getPort();
         provider.getRequestContext()
                 .put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, properties.getWebserviceEndpoint());
+
+        // Add request/response logging interceptors to client
+        Client client = ClientProxy.getClient(getPort());
+        client.getOutInterceptors().add(new LoggingOutInterceptor());
+        client.getInInterceptors().add(new LoggingInInterceptor());
 
         addWSSecurity((BindingProvider) getPort(), stsIdentity);
     }
