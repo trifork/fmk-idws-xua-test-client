@@ -1,5 +1,6 @@
 package com.trifork.idwsxua.fmktestclient.sts;
 
+import static dk.sds.samlh.model.AttributeNameConstants.*;
 import dk.sds.samlh.model.ModelUtil;
 import dk.sds.samlh.model.Validate;
 import dk.sds.samlh.model.onbehalfof.OnBehalfOf;
@@ -44,29 +45,30 @@ public class ClaimsCallbackHandler implements CallbackHandler {
             doc.appendChild(claimsElement);
 
             if (context.isIncludeDefaultClaims()) {
-                addClaim(claimsElement, "dk:healthcare:saml:attribute:SystemVersion", "1.5");
-                addClaim(claimsElement, "dk:healthcare:saml:attribute:SystemName", "test-client");
-                addClaim(claimsElement, "dk:healthcare:saml:attribute:SystemUsingOrganisationName", "Region Test");
-                addClaim(claimsElement, "urn:oid:2.5.4.10", "Syfilis klinikken");
+                addClaim(claimsElement, SYSTEM_VERSION, "1.5");
+                addClaim(claimsElement, SYSTEM_NAME, "test-client");
+                addClaim(claimsElement, SYSTEM_USING_ORGANISATION_NAME, "Region Test");
+                addClaim(claimsElement, ORGANIZATION_NAME, "Syfilis klinikken");
             }
 
             if (resourceId != null) {
-                addClaim(claimsElement, "urn:oasis:names:tc:xacml:2.0:resource:resource-id", resourceId.generate(Validate.YES));
+                addClaim(claimsElement, RESOURCE_ID, resourceId.generate(Validate.YES));
             }
             if (providerIdentifier != null) {
-                addClaim(claimsElement, "urn:ihe:iti:xua:2017:subject:provider-identifier", providerIdentifier.generateElement(Validate.YES));
+                addClaim(claimsElement, PROVIDER_IDENTIFIER, providerIdentifier.generateElement(Validate.YES));
             }
             if (onBehalfOf != null) {
-                addClaim(claimsElement, "dk:healthcare:saml:attribute:OnBehalfOf", onBehalfOf.generate(Validate.YES));
+                addClaim(claimsElement, ON_BEHALF_OF, onBehalfOf.generate(Validate.YES));
             }
             if (context.getEducationCode() != null) {
-                addClaim(claimsElement, "dk:healthcare:saml:attribute:UserEducationCode", context.getEducationCode());
+                addClaim(claimsElement, USER_EDUCATION_CODE, context.getEducationCode());
             }
             if (context.getRole() != null) {
                 Element roleElement = context.getRole().generateElement(Validate.YES);
                 
-                // TODO: When STS is fixed, do this instead:
-                // addClaim(claimsElement, "urn:oasis:names:tc:xacml:2.0:subject:role", roleElement);
+                addClaim(claimsElement, ROLE, roleElement);
+
+                // TODO: Remove this claim when STS is fixed to use the correct claim name for role above:
                 addClaim(claimsElement, "urn:oasis:names:tc:xspa:1.0:subject:role", roleElement);
             }
 
