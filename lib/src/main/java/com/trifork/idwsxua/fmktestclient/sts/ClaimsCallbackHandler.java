@@ -45,10 +45,10 @@ public class ClaimsCallbackHandler implements CallbackHandler {
             doc.appendChild(claimsElement);
 
             if (context.isIncludeDefaultClaims()) {
-                addClaim(claimsElement, SYSTEM_VERSION, "1.5");
-                addClaim(claimsElement, SYSTEM_NAME, "test-client");
-                addClaim(claimsElement, SYSTEM_USING_ORGANISATION_NAME, "Region Test");
-                addClaim(claimsElement, ORGANIZATION_NAME, "Syfilis klinikken");
+                addClaim(claimsElement, SYSTEM_VERSION, "1.0");
+                addClaim(claimsElement, SYSTEM_NAME, "fmk-idws-test-client");
+                addClaim(claimsElement, SYSTEM_USING_ORGANISATION_NAME, "Trifork");
+                addClaim(claimsElement, ORGANIZATION_NAME, "Softwareklinikken");
             }
 
             if (resourceId != null) {
