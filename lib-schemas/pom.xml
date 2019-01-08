@@ -51,6 +51,28 @@
                                         <extraarg>dk.dkma.medicinecard.xml_schema._2015._01._01._e1</extraarg>
                                     </extraargs>
                                 </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>
+                                        ${basedir}/src/main/resources/wsdl/EffectuationOrdering_Idws_Xua_2015_01_01.wsdl
+                                    </wsdl>
+                                    <wsdlLocation>classpath:wsdl/EffectuationOrdering_Idws_Xua_2015_01_01.wsdl</wsdlLocation>
+                                    <extraargs>
+                                        <extraarg>-p</extraarg>
+                                        <!-- Differs from targetNamespace to avoid conflict with other WSDL with same namespace -->
+                                        <extraarg>dk.dkma.effectuationordering.xml_schema._2015._01._01</extraarg>
+                                    </extraargs>
+                                </wsdlOption>
+                                <wsdlOption>
+                                    <wsdl>
+                                        ${basedir}/src/main/resources/wsdl/PatientRegistration_Idws_Xua_2015_01_01_E1.wsdl
+                                    </wsdl>
+                                    <wsdlLocation>classpath:wsdl/PatientRegistration_Idws_Xua_2015_01_01_E1.wsdl</wsdlLocation>
+                                    <extraargs>
+                                        <extraarg>-p</extraarg>
+                                        <!-- Differs from targetNamespace to avoid conflict with other WSDL with same namespace -->
+                                        <extraarg>dk.dkma.patientregistration.xml_schema._2015._01._01._e1</extraarg>
+                                    </extraargs>
+                                </wsdlOption>
                             </wsdlOptions>
                         </configuration>
                     </execution>
