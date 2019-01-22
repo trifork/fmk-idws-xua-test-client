@@ -1,13 +1,19 @@
-package com.trifork.idwsxua.fmktestclient.util;
+package com.trifork.idwsxua.fmktestclient;
 
+import com.trifork.idwsxua.fmktestclient.client.ApiVersion;
+import com.trifork.idwsxua.fmktestclient.util.XUAProperties;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-@Configuration
-@EnableConfigurationProperties
+import java.util.Arrays;
+
+@Component
 @ConfigurationProperties(prefix="fmkclient")
-public class Properties {
+public class Properties implements XUAProperties {
+
+    private static final Logger logger = LogManager.getLogger(Properties.class);
 
     private String keystoreFile;
     private String keystorePassword;
@@ -25,8 +31,9 @@ public class Properties {
     private String onBehalfOfCpr;
     private String educationCode;
     private String personIdentifier;
-    private String apiVersion;
+    private ApiVersion apiVersion;
 
+    @Override
     public String getKeystoreFile() {
         return keystoreFile;
     }
@@ -35,6 +42,7 @@ public class Properties {
         this.keystoreFile = keystoreFile;
     }
 
+    @Override
     public String getKeystorePassword() {
         return keystorePassword;
     }
@@ -43,6 +51,7 @@ public class Properties {
         this.keystorePassword = keystorePassword;
     }
 
+    @Override
     public String getPrivateKeyPassword() {
         return privateKeyPassword;
     }
@@ -51,6 +60,7 @@ public class Properties {
         this.privateKeyPassword = privateKeyPassword;
     }
 
+    @Override
     public String getStsWsdl() {
         return stsWsdl;
     }
@@ -59,6 +69,7 @@ public class Properties {
         this.stsWsdl = stsWsdl;
     }
 
+    @Override
     public String getWebserviceEndpoint() {
         return webserviceEndpoint;
     }
@@ -67,14 +78,21 @@ public class Properties {
         this.webserviceEndpoint = webserviceEndpoint;
     }
 
-    public String getApiVersion() {
+    @Override
+    public ApiVersion getApiVersion() {
         return apiVersion;
     }
 
     public void setApiVersion(String apiVersion) {
-        this.apiVersion = apiVersion;
+        try {
+            this.apiVersion = ApiVersion.valueOf(apiVersion);
+        } catch (IllegalArgumentException e) {
+            logger.error("API version not valid: [" + apiVersion + "]. Valid API versions are: " + Arrays.toString(ApiVersion.values()));
+            System.exit(1);
+        }
     }
 
+    @Override
     public STSBootstrap getStsBootstrap() {
         return stsBootstrap;
     }
@@ -83,6 +101,7 @@ public class Properties {
         this.stsBootstrap = stsBootstrap;
     }
 
+    @Override
     public STSIdentity getStsIdentity() {
         return stsIdentity;
     }
@@ -91,6 +110,7 @@ public class Properties {
         this.stsIdentity = stsIdentity;
     }
     
+    @Override
     public String getPersonIdentifier() {
         return personIdentifier;
     }
@@ -99,6 +119,7 @@ public class Properties {
         this.personIdentifier = personIdentifier;
     }
     
+    @Override
     public int getRepeats() {
         return repeats;
     }
@@ -107,6 +128,7 @@ public class Properties {
         this.repeats = repeats;
     }
 
+    @Override
     public int getRepeatDelayMs() {
         return repeatDelayMs;
     }
@@ -115,6 +137,7 @@ public class Properties {
         this.repeatDelayMs = repeatDelayMs;
     }
 
+    @Override
     public String getRole() {
         return role;
     }
@@ -123,6 +146,7 @@ public class Properties {
         this.role = role;
     }
 
+    @Override
     public String getOnBehalfOfAuth() {
         return onBehalfOfAuth;
     }
@@ -131,6 +155,7 @@ public class Properties {
         this.onBehalfOfAuth = onBehalfOfAuth;
     }
 
+    @Override
     public String getOnBehalfOfCpr() {
         return onBehalfOfCpr;
     }
@@ -139,54 +164,13 @@ public class Properties {
         this.onBehalfOfCpr = onBehalfOfCpr;
     }
 
+    @Override
     public String getEducationCode() {
         return educationCode;
     }
     
     public void setEducationCode(String educationCode) {
         this.educationCode = educationCode;
-    }
-
-    public class STSBootstrap {
-        private String endpoint;
-        private String audience;
-
-        public String getEndpoint() {
-            return endpoint;
-        }
-
-        public void setEndpoint(String endpoint) {
-            this.endpoint = endpoint;
-        }
-
-        public String getAudience() {
-            return audience;
-        }
-
-        public void setAudience(String audience) {
-            this.audience = audience;
-        }
-    }
-
-    public class STSIdentity {
-        private String endpoint;
-        private String audience;
-
-        public String getEndpoint() {
-            return endpoint;
-        }
-
-        public void setEndpoint(String endpoint) {
-            this.endpoint = endpoint;
-        }
-
-        public String getAudience() {
-            return audience;
-        }
-
-        public void setAudience(String audience) {
-            this.audience = audience;
-        }
     }
 
 }

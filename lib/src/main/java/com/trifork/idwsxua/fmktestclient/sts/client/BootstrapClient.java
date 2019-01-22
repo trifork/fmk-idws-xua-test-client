@@ -2,7 +2,7 @@ package com.trifork.idwsxua.fmktestclient.sts.client;
 
 import com.trifork.idwsxua.fmktestclient.sts.ActAsSelfsignedCallbackHandler;
 import com.trifork.idwsxua.fmktestclient.sts.ClientCallbackHandler;
-import com.trifork.idwsxua.fmktestclient.util.Properties;
+import com.trifork.idwsxua.fmktestclient.util.XUAProperties;
 import org.apache.cxf.Bus;
 import org.apache.cxf.BusFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class BootstrapClient implements STSClientWrapper {
     private final XUASTSClient client;
 
     @Autowired
-    public BootstrapClient(Properties properties) {
+    public BootstrapClient(XUAProperties properties) {
         Bus defaultBus = BusFactory.getDefaultBus();
         client = new XUASTSClient(defaultBus);
 

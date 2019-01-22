@@ -1,16 +1,12 @@
 package com.trifork.idwsxua.fmktestclient;
 
+import com.trifork.idwsxua.fmktestclient.client.MedicineCardClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-
-import com.trifork.idwsxua.fmktestclient.client.MedicineCardClient;
-import com.trifork.idwsxua.fmktestclient.client.MedicineCard_2015_01_01;
-import com.trifork.idwsxua.fmktestclient.client.MedicineCard_2015_01_01_E1;
-import com.trifork.idwsxua.fmktestclient.util.Properties;
 
 @Component
 public class ApplicationRunner implements CommandLineRunner {
@@ -32,24 +28,13 @@ public class ApplicationRunner implements CommandLineRunner {
         // Starting app
         logger.info("Starting FMK Test Client...");
 
-        String apiVersion = properties.getApiVersion();
+        // Create a MedicineCardClient
+        String apiVersion = properties.getApiVersion().name();
+        final MedicineCardClient medicineCardClient = applicationContext.getBean(apiVersion, MedicineCardClient.class);
+
         int repeats = properties.getRepeats();
         int repeatDelayMs = properties.getRepeatDelayMs();
         String personIdentifier = properties.getPersonIdentifier();
-        
-        // Create a MedicineCardClient
-        final MedicineCardClient medicineCardClient;
-
-        switch (apiVersion) {
-            case "MedicineCard_2015_01_01":
-                medicineCardClient = applicationContext.getBean(MedicineCard_2015_01_01.class);
-                break;
-            case "MedicineCard_2015_01_01_E1":
-                medicineCardClient = applicationContext.getBean(MedicineCard_2015_01_01_E1.class);
-                break;
-            default:
-                throw new IllegalArgumentException("Unrecognized api version");
-        }
 
         for (int i = 1; i <= repeats; i++) {
             logger.info("--- Call count: " + i + " ---");

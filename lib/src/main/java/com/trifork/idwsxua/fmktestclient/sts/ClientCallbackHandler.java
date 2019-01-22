@@ -13,6 +13,7 @@ public class ClientCallbackHandler implements CallbackHandler {
             if (callback instanceof WSPasswordCallback) {
                 WSPasswordCallback pc = (WSPasswordCallback) callback;
                 if (pc.getUsage() == WSPasswordCallback.DECRYPT || pc.getUsage() == WSPasswordCallback.SIGNATURE) {
+                    // TODO: Do not hardcode password
                     pc.setPassword("Test1234");
                 }
             }

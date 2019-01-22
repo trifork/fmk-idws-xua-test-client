@@ -2,7 +2,7 @@ package com.trifork.idwsxua.fmktestclient.client;
 
 import com.trifork.idwsxua.fmktestclient.sts.TokenProvider;
 import com.trifork.idwsxua.fmktestclient.sts.client.STSClientWrapper;
-import com.trifork.idwsxua.fmktestclient.util.Properties;
+import com.trifork.idwsxua.fmktestclient.util.XUAProperties;
 import dk.dkma.medicinecard.xml_schema._2015._01._01.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,22 +15,21 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
-@Component
+@Component("MedicineCard_2015_01_01")
 public class MedicineCard_2015_01_01 extends MedicineCardClient {
 
-    private static final Logger logger = LogManager.getLogger(MedicineCardClient.class);
+    private static final Logger logger = LogManager.getLogger(MedicineCard_2015_01_01.class);
 
     private final MedicineCardPortType port = new MedicineCardService().getMedicineCardPort();
     private final ObjectFactory objectFactory = new ObjectFactory();
     private final Marshaller marshaller = medicineCardMarshaller();
 
     @Autowired
-    public MedicineCard_2015_01_01(Properties properties,
+    public MedicineCard_2015_01_01(XUAProperties properties,
                                    @Qualifier("bootstrapClient") STSClientWrapper stsBootstrap,
                                    @Qualifier("employeeClient") STSClientWrapper stsIdentity,
-                                   TokenProvider tokenProvider) throws JAXBException, IOException, URISyntaxException {
+                                   TokenProvider tokenProvider) throws JAXBException, IOException {
         super(properties, stsBootstrap, stsIdentity, tokenProvider);
     }
 

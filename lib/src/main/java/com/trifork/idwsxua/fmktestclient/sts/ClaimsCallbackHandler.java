@@ -1,6 +1,5 @@
 package com.trifork.idwsxua.fmktestclient.sts;
 
-import static dk.sds.samlh.model.AttributeNameConstants.*;
 import dk.sds.samlh.model.ModelUtil;
 import dk.sds.samlh.model.Validate;
 import dk.sds.samlh.model.onbehalfof.OnBehalfOf;
@@ -13,6 +12,8 @@ import org.w3c.dom.Element;
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.UnsupportedCallbackException;
+
+import static dk.sds.samlh.model.AttributeNameConstants.*;
 
 public class ClaimsCallbackHandler implements CallbackHandler {
 
@@ -44,6 +45,7 @@ public class ClaimsCallbackHandler implements CallbackHandler {
             claimsElement.setAttributeNS(null, "Dialect", "http://docs.oasis-open.org/wsfed/authorization/200706/authclaims");
             doc.appendChild(claimsElement);
 
+            // TODO: Do not hardcode values
             if (context.isIncludeDefaultClaims()) {
                 addClaim(claimsElement, SYSTEM_VERSION, "1.0");
                 addClaim(claimsElement, SYSTEM_NAME, "fmk-idws-test-client");

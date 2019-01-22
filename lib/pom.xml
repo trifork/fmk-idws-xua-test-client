@@ -23,28 +23,21 @@
     </repositories>
 
     <dependencies>
-        <!-- Spring Boot -->
-        <!-- Should resolve versions based on parent project -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <dependency>
@@ -64,13 +57,6 @@
             <artifactId>cxf-rt-ws-security</artifactId>
             <version>${cxf.version}</version>
         </dependency>
-
-        <!-- cxf and oiosaml use different versions of this dependency, so we explicitly set the one that works -->
-        <!--<dependency>
-            <groupId>org.apache.santuario</groupId>
-            <artifactId>xmlsec</artifactId>
-            <version>2.0.8</version>
-        </dependency>-->
 
         <dependency>
             <groupId>commons-io</groupId>

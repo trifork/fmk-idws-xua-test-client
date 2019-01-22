@@ -5,12 +5,12 @@ import org.springframework.beans.FatalBeanException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 
-import com.trifork.idwsxua.fmktestclient.util.Properties;
-
 @SpringBootApplication
+@EnableConfigurationProperties
 @Import(IDWSXUALibSpringConfiguration.class)
 public class Application {
 
@@ -34,7 +34,7 @@ public class Application {
         };
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Application.args = args;
         SpringApplication.run(Application.class, args);
     }

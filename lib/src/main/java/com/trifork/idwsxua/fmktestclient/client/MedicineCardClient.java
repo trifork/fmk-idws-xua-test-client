@@ -6,7 +6,7 @@ import com.trifork.idwsxua.fmktestclient.sts.TokenProvider;
 import com.trifork.idwsxua.fmktestclient.sts.client.STSClientWrapper;
 import com.trifork.idwsxua.fmktestclient.sts.client.XUASTSClient;
 import com.trifork.idwsxua.fmktestclient.util.KeystorePasswordCallback;
-import com.trifork.idwsxua.fmktestclient.util.Properties;
+import com.trifork.idwsxua.fmktestclient.util.XUAProperties;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
@@ -32,13 +32,13 @@ public abstract class MedicineCardClient {
 
     private static final Logger logger = LogManager.getLogger(MedicineCardClient.class);
 
-    protected final Properties properties;
+    protected final XUAProperties properties;
     protected final XUASTSClient stsBootstrap;
     protected final XUASTSClient stsIdentity;
     protected final TokenProvider tokenProvider;
     private final java.util.Properties wss4jProperties;
 
-    MedicineCardClient(Properties properties,
+    MedicineCardClient(XUAProperties properties,
                        STSClientWrapper stsBootstrap,
                        STSClientWrapper stsIdentity,
                        TokenProvider tokenProvider) throws IOException {

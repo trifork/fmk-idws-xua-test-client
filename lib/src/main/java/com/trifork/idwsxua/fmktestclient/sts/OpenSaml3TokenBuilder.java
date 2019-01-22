@@ -18,7 +18,6 @@ import org.opensaml.xmlsec.signature.impl.X509DataBuilder;
 import org.opensaml.xmlsec.signature.support.SignatureConstants;
 import org.opensaml.xmlsec.signature.support.SignatureException;
 import org.opensaml.xmlsec.signature.support.Signer;
-import org.w3c.dom.Element;
 
 import javax.security.auth.x500.X500Principal;
 import javax.xml.namespace.QName;

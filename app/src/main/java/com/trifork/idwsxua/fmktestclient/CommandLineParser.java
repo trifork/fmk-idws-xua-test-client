@@ -6,8 +6,6 @@ import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
-import com.trifork.idwsxua.fmktestclient.util.Properties;
-
 public class CommandLineParser {
 
     private static final Logger logger = LogManager.getLogger(CommandLineParser.class);
@@ -36,7 +34,7 @@ public class CommandLineParser {
     @Option(name = "-m", aliases = "--ms", depends = "-l", usage = "milliseconds to wait between the calls")
     private Integer ms;
 
-    @Option(name = "-a", aliases = "--api", usage = "FMK version to use")
+    @Option(name = "-a", aliases = "--api", usage = "API version to use")
     private String apiVersion;
 
     @Option(name = "-p", aliases = "--personidentifier", usage = "GetMedicineCardRequest: person identifier")
@@ -54,7 +52,7 @@ public class CommandLineParser {
     @Option(name = "-e", aliases = "--educationCode", usage = "GetMedicineCardRequest: Education code")
     private String educationCode;
 
-    public Properties parse(String... args) throws Exception {
+    public Properties parse(String... args) {
         CmdLineParser parser = new CmdLineParser(this);
 
         // For arguments without key
@@ -114,7 +112,7 @@ public class CommandLineParser {
         if (userCertPassword != null) {
             properties.setKeystorePassword(userCertPassword);
         }
-        
+
         return properties;
     }
 }

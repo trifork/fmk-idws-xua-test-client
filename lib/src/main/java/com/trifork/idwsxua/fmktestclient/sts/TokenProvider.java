@@ -1,19 +1,13 @@
 package com.trifork.idwsxua.fmktestclient.sts;
 
 
-import com.trifork.idwsxua.fmktestclient.sts.OpenSaml3TokenBuilder;
-import com.trifork.idwsxua.fmktestclient.sts.SessionContext;
-import com.trifork.idwsxua.fmktestclient.sts.SessionContextHolder;
-import com.trifork.idwsxua.fmktestclient.sts.TokenHolder;
-import com.trifork.idwsxua.fmktestclient.util.Properties;
 import com.trifork.idwsxua.fmktestclient.util.X509CertUtil;
-
+import com.trifork.idwsxua.fmktestclient.util.XUAProperties;
 import dk.sds.samlh.model.onbehalfof.OnBehalfOf;
 import dk.sds.samlh.model.onbehalfof.OnBehalfOf.Legislation;
 import dk.sds.samlh.model.provideridentifier.ProviderIdentifier;
 import dk.sds.samlh.model.resourceid.ResourceId;
 import dk.sds.samlh.model.role.Role;
-
 import org.apache.cxf.ws.security.tokenstore.SecurityToken;
 import org.apache.cxf.ws.security.trust.STSClient;
 import org.apache.logging.log4j.LogManager;
@@ -36,13 +30,13 @@ public class TokenProvider {
 
     private static final Logger logger = LogManager.getLogger(TokenProvider.class);
 
-    private final Properties properties;
+    private final XUAProperties properties;
 
     private static final ThreadLocal<Assertion> assertionHolder = new ThreadLocal<>();
     private final PrivateKey employeeKey;
     private final X509Certificate employeeCertificate;
 
-    public TokenProvider(Properties properties) throws KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, InitializationException {
+    public TokenProvider(XUAProperties properties) throws KeyStoreException, UnrecoverableKeyException, NoSuchAlgorithmException, InitializationException {
         this.properties = properties;
 
         // Initialize OpenSAML
@@ -76,6 +70,7 @@ public class TokenProvider {
             // logger.debug(XmlHelper.node2String(bootstrapToken.getToken(), true, true));
 
             SessionContextHolder.get().setIncludeDefaultClaims(true);
+            // TODO: Do not hardcode values
             initPatientContext("541133", properties.getPersonIdentifier());
         }
     }

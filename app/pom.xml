@@ -52,31 +52,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>${cxf.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http</artifactId>
-            <version>${cxf.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-ws-security</artifactId>
-            <version>${cxf.version}</version>
-        </dependency>
-
-        <!-- cxf and oiosaml use different versions of this dependency, so we explicitly set the one that works -->
-        <!--<dependency>
-            <groupId>org.apache.santuario</groupId>
-            <artifactId>xmlsec</artifactId>
-            <version>2.0.8</version>
-        </dependency>-->
-
-        <dependency>
             <groupId>com.trifork.idws-xua</groupId>
             <artifactId>fmk-idws-xua-test-lib</artifactId>
             <version>${project.version}</version>
