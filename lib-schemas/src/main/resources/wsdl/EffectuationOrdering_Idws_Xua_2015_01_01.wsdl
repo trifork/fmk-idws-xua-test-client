@@ -128,6 +128,7 @@
             <wsdl:input
                     name="GetOrderedEffectuationsIdwsRequest_2015_01_01">
                 <wsp:PolicyReference URI="#IDWS_XUA_Input_Policy"/>
+                <soap:body use="literal"/>
             </wsdl:input>
             <wsdl:output name="GetOrderedEffectuationsIdwsResponse_2015_01_01">
                 <wsp:PolicyReference URI="#IDWS_XUA_Output_Policy"/>
