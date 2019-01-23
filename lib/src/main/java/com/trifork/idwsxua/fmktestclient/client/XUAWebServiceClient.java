@@ -19,7 +19,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
 
 import javax.annotation.PostConstruct;
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.ws.BindingProvider;
@@ -28,9 +27,9 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.Map;
 
-public abstract class MedicineCardClient {
+public abstract class XUAWebServiceClient {
 
-    private static final Logger logger = LogManager.getLogger(MedicineCardClient.class);
+    private static final Logger logger = LogManager.getLogger(XUAWebServiceClient.class);
 
     protected final XUAProperties properties;
     protected final XUASTSClient stsBootstrap;
@@ -38,10 +37,10 @@ public abstract class MedicineCardClient {
     protected final TokenProvider tokenProvider;
     private final java.util.Properties wss4jProperties;
 
-    MedicineCardClient(XUAProperties properties,
-                       STSClientWrapper stsBootstrap,
-                       STSClientWrapper stsIdentity,
-                       TokenProvider tokenProvider) throws IOException {
+    XUAWebServiceClient(XUAProperties properties,
+                        STSClientWrapper stsBootstrap,
+                        STSClientWrapper stsIdentity,
+                        TokenProvider tokenProvider) throws IOException {
         this.properties = properties;
         this.stsBootstrap = stsBootstrap.getClient();
         this.stsIdentity = stsIdentity.getClient();
@@ -70,7 +69,7 @@ public abstract class MedicineCardClient {
                 .put(Message.ENDPOINT_ADDRESS, properties.getStsIdentity().getEndpoint());
     }
 
-    public abstract String getMedicineCard(String personIdentifier) throws Exception;
+    public abstract String callTestAction(String personIdentifier) throws Exception;
 
     protected abstract Object getPort();
 
@@ -89,7 +88,7 @@ public abstract class MedicineCardClient {
         addWSSecurity((BindingProvider) getPort(), stsIdentity);
     }
 
-    protected String getResponseString(JAXBElement jaxbElement, Marshaller marshaller) throws JAXBException {
+    protected String getResponseString(Object jaxbElement, Marshaller marshaller) throws JAXBException {
         StringWriter sw = new StringWriter();
         marshaller.marshal(jaxbElement, sw);
         return sw.toString();

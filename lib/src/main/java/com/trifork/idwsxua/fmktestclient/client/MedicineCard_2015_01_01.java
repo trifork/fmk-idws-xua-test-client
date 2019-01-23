@@ -11,18 +11,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.IOException;
 
 @Component("MedicineCard_2015_01_01")
-public class MedicineCard_2015_01_01 extends MedicineCardClient {
+public class MedicineCard_2015_01_01 extends XUAWebServiceClient {
 
     private static final Logger logger = LogManager.getLogger(MedicineCard_2015_01_01.class);
 
     private final MedicineCardPortType port = new MedicineCardService().getMedicineCardPort();
-    private final ObjectFactory objectFactory = new ObjectFactory();
     private final Marshaller marshaller = medicineCardMarshaller();
 
     @Autowired
@@ -34,17 +32,15 @@ public class MedicineCard_2015_01_01 extends MedicineCardClient {
     }
 
     @Override
-    public String getMedicineCard(String personIdentifier) throws Exception {
+    public String callTestAction(String personIdentifier) throws Exception {
         tokenProvider.refreshBootstrapToken(stsBootstrap);
 
         // then perform a webservice call, which implicitly performs an ActAs call to the STS to get a token for this endpoint
-        GetMedicineCardRequestType requestType = new GetMedicineCardRequestType();
+        GetMedicineCardRequest requestType = new GetMedicineCardRequest();
         requestType.setPersonIdentifier(personIdentifier);
 
-        GetMedicineCardResponseType response = port.getMedicineCard20150101(requestType);
-        JAXBElement<GetMedicineCardResponseType> responseJaxbElement = objectFactory.createGetMedicineCardResponse(response);
-
-        return getResponseString(responseJaxbElement, marshaller);
+        GetMedicineCardResponse response = port.getMedicineCard20150101(requestType);
+        return getResponseString(response, marshaller);
     }
 
     @Override

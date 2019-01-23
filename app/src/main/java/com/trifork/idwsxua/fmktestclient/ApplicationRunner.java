@@ -1,6 +1,6 @@
 package com.trifork.idwsxua.fmktestclient;
 
-import com.trifork.idwsxua.fmktestclient.client.MedicineCardClient;
+import com.trifork.idwsxua.fmktestclient.client.XUAWebServiceClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class ApplicationRunner implements CommandLineRunner {
 
         // Create a MedicineCardClient
         String apiVersion = properties.getApiVersion().name();
-        final MedicineCardClient medicineCardClient = applicationContext.getBean(apiVersion, MedicineCardClient.class);
+        final XUAWebServiceClient webserviceClient = applicationContext.getBean(apiVersion, XUAWebServiceClient.class);
 
         int repeats = properties.getRepeats();
         int repeatDelayMs = properties.getRepeatDelayMs();
@@ -38,7 +38,7 @@ public class ApplicationRunner implements CommandLineRunner {
 
         for (int i = 1; i <= repeats; i++) {
             logger.info("--- Call count: " + i + " ---");
-            final String response = medicineCardClient.getMedicineCard(personIdentifier);
+            final String response = webserviceClient.callTestAction(personIdentifier);
             logger.info("WSP response:");
             logger.info(response);
             if (i < repeats) {
