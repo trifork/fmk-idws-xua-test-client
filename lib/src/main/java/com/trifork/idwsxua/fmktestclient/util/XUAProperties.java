@@ -9,8 +9,6 @@ public interface XUAProperties {
 
     String getPrivateKeyPassword();
 
-    String getStsWsdl();
-
     String getWebserviceEndpoint();
 
     ApiVersion getApiVersion();
@@ -35,6 +33,7 @@ public interface XUAProperties {
 
     class STSBootstrap {
         private String endpoint;
+        private String wsdl;
         private String audience;
 
         public String getEndpoint() {
@@ -43,6 +42,14 @@ public interface XUAProperties {
 
         public void setEndpoint(String endpoint) {
             this.endpoint = endpoint;
+        }
+
+        public String getWsdl() {
+            return wsdl;
+        }
+
+        public void setWsdl(String wsdl) {
+            this.wsdl = wsdl;
         }
 
         public String getAudience() {
@@ -56,6 +63,7 @@ public interface XUAProperties {
 
     class STSIdentity {
         private String endpoint;
+        private String wsdl;
         private String audience;
 
         public String getEndpoint() {
@@ -64,6 +72,14 @@ public interface XUAProperties {
 
         public void setEndpoint(String endpoint) {
             this.endpoint = endpoint;
+        }
+
+        public String getWsdl() {
+            return wsdl;
+        }
+
+        public void setWsdl(String wsdl) {
+            this.wsdl = wsdl;
         }
 
         public String getAudience() {

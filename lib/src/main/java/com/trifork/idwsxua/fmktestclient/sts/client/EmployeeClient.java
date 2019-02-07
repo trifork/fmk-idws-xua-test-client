@@ -22,7 +22,7 @@ public class EmployeeClient implements STSClientWrapper {
         Bus defaultBus = BusFactory.getDefaultBus();
         client = new XUASTSClient(defaultBus);
 
-        client.setWsdlLocation(properties.getStsWsdl());
+        client.setWsdlLocation(properties.getStsIdentity().getWsdl());
         client.setServiceName("{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}SecurityTokenService");
         client.setEndpointName("{http://docs.oasis-open.org/ws-sx/ws-trust/200512/}Employee");
         client.setSendRenewing(false);

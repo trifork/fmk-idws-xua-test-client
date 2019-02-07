@@ -7,9 +7,6 @@ fmkclient:
   keystoreFile: MOCES_cpr_gyldig.p12
   keystorePassword: Test1234
   privateKeyPassword: Test1234
-  stsWsdl: "classpath:sts.wsdl"
-  #stsWsdl: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee?wsdl"
-  #stsWsdl: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee/bootstrap?wsdl"
   webserviceEndpoint: "https://test1.fmk.netic.dk/proxy/services/fmk_xua_144"
   apiVersion: MedicineCard_2015_01_01
   repeats: 1
@@ -20,8 +17,10 @@ fmkclient:
   stsBootstrap:
     endpoint: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee/bootstrap"
     #endpoint: "http://sts-idws-xua:8181/service/sts"
+    wsdl: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee/bootstrap?wsdl"
     audience: "http://sts.sundhedsdatastyrelsen.dk/"
   stsIdentity:
     endpoint: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee"
     #endpoint: "http://sts-idws-xua:8181/service/sts"
+    wsdl: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee?wsdl"
     audience: "https://fmk"

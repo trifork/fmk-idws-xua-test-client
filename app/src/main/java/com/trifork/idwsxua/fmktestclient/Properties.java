@@ -18,7 +18,6 @@ public class Properties implements XUAProperties {
     private String keystoreFile;
     private String keystorePassword;
     private String privateKeyPassword;
-    private String stsWsdl;
     private String webserviceEndpoint;
     private STSBootstrap stsBootstrap = new STSBootstrap();
     private STSIdentity stsIdentity = new STSIdentity();
@@ -58,15 +57,6 @@ public class Properties implements XUAProperties {
 
     public void setPrivateKeyPassword(String privateKeyPassword) {
         this.privateKeyPassword = privateKeyPassword;
-    }
-
-    @Override
-    public String getStsWsdl() {
-        return stsWsdl;
-    }
-
-    public void setStsWsdl(String stsWsdl) {
-        this.stsWsdl = stsWsdl;
     }
 
     @Override
