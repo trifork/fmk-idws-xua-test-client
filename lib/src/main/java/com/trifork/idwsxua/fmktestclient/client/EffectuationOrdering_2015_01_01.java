@@ -19,7 +19,7 @@ import javax.xml.bind.Marshaller;
 import java.io.IOException;
 
 @Component("EffectuationOrdering_2015_01_01")
-public class EffectuationOrdering_2015_01_01 extends XUAWebServiceClient {
+public class EffectuationOrdering_2015_01_01 extends AbstractXUABootstrapWebServiceClient {
 
     private static final Logger logger = LogManager.getLogger(EffectuationOrdering_2015_01_01.class);
 

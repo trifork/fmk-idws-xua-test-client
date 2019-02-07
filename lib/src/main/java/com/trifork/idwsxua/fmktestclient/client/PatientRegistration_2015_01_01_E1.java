@@ -19,7 +19,7 @@ import javax.xml.bind.Marshaller;
 import java.io.IOException;
 
 @Component("PatientRegistration_2015_01_01_E1")
-public class PatientRegistration_2015_01_01_E1 extends XUAWebServiceClient {
+public class PatientRegistration_2015_01_01_E1 extends AbstractXUABootstrapWebServiceClient {
 
     private static final Logger logger = LogManager.getLogger(PatientRegistration_2015_01_01_E1.class);
 

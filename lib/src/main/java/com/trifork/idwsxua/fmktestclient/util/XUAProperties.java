@@ -17,6 +17,8 @@ public interface XUAProperties {
 
     STSIdentity getStsIdentity();
 
+    STSSystem getStsSystem();
+
     String getPersonIdentifier();
 
     int getRepeats();
@@ -62,6 +64,36 @@ public interface XUAProperties {
     }
 
     class STSIdentity {
+        private String endpoint;
+        private String wsdl;
+        private String audience;
+
+        public String getEndpoint() {
+            return endpoint;
+        }
+
+        public void setEndpoint(String endpoint) {
+            this.endpoint = endpoint;
+        }
+
+        public String getWsdl() {
+            return wsdl;
+        }
+
+        public void setWsdl(String wsdl) {
+            this.wsdl = wsdl;
+        }
+
+        public String getAudience() {
+            return audience;
+        }
+
+        public void setAudience(String audience) {
+            this.audience = audience;
+        }
+    }
+
+    class STSSystem {
         private String endpoint;
         private String wsdl;
         private String audience;

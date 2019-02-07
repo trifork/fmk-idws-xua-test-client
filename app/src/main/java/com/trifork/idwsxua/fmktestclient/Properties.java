@@ -21,6 +21,7 @@ public class Properties implements XUAProperties {
     private String webserviceEndpoint;
     private STSBootstrap stsBootstrap = new STSBootstrap();
     private STSIdentity stsIdentity = new STSIdentity();
+    private STSSystem stsSystem = new STSSystem();
 
     private int repeats;
 
@@ -94,6 +95,11 @@ public class Properties implements XUAProperties {
     @Override
     public STSIdentity getStsIdentity() {
         return stsIdentity;
+    }
+
+    @Override
+    public STSSystem getStsSystem() {
+        return stsSystem;
     }
 
     public void setStsIdentity(STSIdentity stsIdentity) {

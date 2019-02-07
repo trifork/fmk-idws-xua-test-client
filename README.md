@@ -5,7 +5,7 @@ Client for testing the IDWS XUA support in FMK (Det Fælles Medicinkort).
 ## Features
 
 * Supports employee authentication by requesting a bootstrap token for accessing the following APIs:
-    * FMK 1.4.4 (MedicineCard_Idws_Xua_2015_01_01). Implemented operation: GetMedicineCard.
+    * FMK 1.4.4 (MedicineCard_Idws_Xua_2015_01_01). Implemented operation: GetMedicineCard (Bootstrap scenario), GetMedicineCardVersion (System User scenario).
     * FMK 1.4.4 E1 (MedicineCard_Idws_Xua_2015_01_01_E1). Implemented operation: GetMedicineCard.
     * EO 1.4.4 (EffectuationOrdering_2015_01_01). Implemented operation: GetOrderedEffectuations.
     * POR 1.4.4 E1 (PatientRegistration_2015_01_01_E1). Implemented operation: GetPatientRegistration.
@@ -66,6 +66,7 @@ The following table summarises the API names (in this library) and endpoints in 
 API name | Endpoint
 --- | ---
 MedicineCard_2015_01_01 | https://test1.fmk.netic.dk/proxy/services/fmk_xua_144
+MedicineCard_2015_01_01_SystemUser | https://test1.fmk.netic.dk/proxy/services/fmk_xua_144
 MedicineCard_2015_01_01_E1 | https://test1.fmk.netic.dk/proxy/services/fmk_xua_144_E1
 EffectuationOrdering_2015_01_01 | https://test1.fmk.netic.dk/proxy/services/eo_xua_144
 PatientRegistration_2015_01_01_E1 | https://test1.fmk.netic.dk/proxy/services/por_xua_144_E1

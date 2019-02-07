@@ -53,6 +53,12 @@ public class TokenProvider {
         employeeKey = (PrivateKey) employeeKeystore.getKey(alias, privateKeyPassword.toCharArray());
     }
 
+    public void initSystemUserContext() {
+        SessionContextHolder.get().setIncludeDefaultClaims(true);
+        // TODO: Do not hardcode values
+        initPatientContext("541133", properties.getPersonIdentifier());
+    }
+
     public void refreshBootstrapToken(STSClient stsBootstrap) throws Exception {
         SecurityToken bootstrapToken = TokenHolder.bootstrapToken;
         if (bootstrapToken == null || bootstrapToken.isExpired()) {

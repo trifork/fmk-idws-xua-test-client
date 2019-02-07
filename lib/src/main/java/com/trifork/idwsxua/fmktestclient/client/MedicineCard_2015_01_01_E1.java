@@ -3,7 +3,10 @@ package com.trifork.idwsxua.fmktestclient.client;
 import com.trifork.idwsxua.fmktestclient.sts.TokenProvider;
 import com.trifork.idwsxua.fmktestclient.sts.client.STSClientWrapper;
 import com.trifork.idwsxua.fmktestclient.util.XUAProperties;
-import dk.dkma.medicinecard.xml_schema._2015._01._01._e1.*;
+import dk.dkma.medicinecard.xml_schema._2015._01._01._e1.GetMedicineCardRequest;
+import dk.dkma.medicinecard.xml_schema._2015._01._01._e1.GetMedicineCardResponse;
+import dk.dkma.medicinecard.xml_schema._2015._01._01._e1.MedicineCardPortType;
+import dk.dkma.medicinecard.xml_schema._2015._01._01._e1.MedicineCardService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,7 @@ import javax.xml.bind.Marshaller;
 import java.io.IOException;
 
 @Component("MedicineCard_2015_01_01_E1")
-public class MedicineCard_2015_01_01_E1 extends XUAWebServiceClient {
+public class MedicineCard_2015_01_01_E1 extends AbstractXUABootstrapWebServiceClient {
 
     private static final Logger logger = LogManager.getLogger(MedicineCard_2015_01_01_E1.class);
 

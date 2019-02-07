@@ -43,6 +43,7 @@ public class XUASTSClient extends STSClient {
         writer.writeEndElement();
     }
 
+    @Override
     protected void addClaims(XMLStreamWriter writer) throws Exception {
         Object claimsToSerialize = this.claims;
         if (claimsToSerialize == null && this.claimsCallbackHandler != null) {

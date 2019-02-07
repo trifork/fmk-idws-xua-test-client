@@ -16,11 +16,13 @@ fmkclient:
   role: Læge
   stsBootstrap:
     endpoint: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee/bootstrap"
-    #endpoint: "http://sts-idws-xua:8181/service/sts"
     wsdl: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee/bootstrap?wsdl"
     audience: "http://sts.sundhedsdatastyrelsen.dk/"
   stsIdentity:
     endpoint: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee"
-    #endpoint: "http://sts-idws-xua:8181/service/sts"
     wsdl: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee?wsdl"
     audience: "https://fmk"
+  stsSystem:
+    endpoint: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/system"
+    wsdl: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/system?wsdl"
+    audience: "https://fmk/"

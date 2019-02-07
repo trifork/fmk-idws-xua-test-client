@@ -3,8 +3,8 @@ package com.trifork.idwsxua.fmktestclient.client;
 import com.trifork.idwsxua.fmktestclient.sts.TokenProvider;
 import com.trifork.idwsxua.fmktestclient.sts.client.STSClientWrapper;
 import com.trifork.idwsxua.fmktestclient.util.XUAProperties;
-import dk.dkma.medicinecard.xml_schema._2015._01._01.GetMedicineCardRequest;
-import dk.dkma.medicinecard.xml_schema._2015._01._01.GetMedicineCardResponse;
+import dk.dkma.medicinecard.xml_schema._2015._01._01.GetMedicineCardVersionRequest;
+import dk.dkma.medicinecard.xml_schema._2015._01._01.GetMedicineCardVersionResponse;
 import dk.dkma.medicinecard.xml_schema._2015._01._01.MedicineCardPortType;
 import dk.dkma.medicinecard.xml_schema._2015._01._01.MedicineCardService;
 import org.apache.logging.log4j.LogManager;
@@ -18,31 +18,30 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.IOException;
 
-@Component("MedicineCard_2015_01_01")
-public class MedicineCard_2015_01_01 extends AbstractXUABootstrapWebServiceClient {
+@Component("MedicineCard_2015_01_01_SystemUser")
+public class MedicineCard_2015_01_01_SystemUser extends AbstractXUASystemUserWebServiceClient {
 
-    private static final Logger logger = LogManager.getLogger(MedicineCard_2015_01_01.class);
+    private static final Logger logger = LogManager.getLogger(MedicineCard_2015_01_01_SystemUser.class);
 
     private final MedicineCardPortType port = new MedicineCardService().getMedicineCardPort();
     private final Marshaller marshaller = medicineCardMarshaller();
 
     @Autowired
-    public MedicineCard_2015_01_01(XUAProperties properties,
-                                   @Qualifier("bootstrapClient") STSClientWrapper stsBootstrap,
-                                   @Qualifier("employeeClient") STSClientWrapper stsIdentity,
-                                   TokenProvider tokenProvider) throws JAXBException, IOException {
-        super(properties, stsBootstrap, stsIdentity, tokenProvider);
+    public MedicineCard_2015_01_01_SystemUser(XUAProperties properties,
+                                              @Qualifier("systemClient") STSClientWrapper stsSystem,
+                                              TokenProvider tokenProvider) throws JAXBException, IOException {
+        super(properties, stsSystem, tokenProvider);
     }
 
     @Override
     public String callTestAction(String personIdentifier) throws Exception {
-        tokenProvider.refreshBootstrapToken(stsBootstrap);
+        tokenProvider.initSystemUserContext();
 
-        // then perform a webservice call, which implicitly performs an ActAs call to the STS to get a token for this endpoint
-        GetMedicineCardRequest requestType = new GetMedicineCardRequest();
+        // Perform a webservice call, which implicitly performs a call to the STS to get a token for this endpoint
+        GetMedicineCardVersionRequest requestType = new GetMedicineCardVersionRequest();
         requestType.setPersonIdentifier(personIdentifier);
 
-        GetMedicineCardResponse response = port.getMedicineCard20150101(requestType);
+        GetMedicineCardVersionResponse response = port.getMedicineCardVersion20150101(requestType);
         return getResponseString(response, marshaller);
     }
 
