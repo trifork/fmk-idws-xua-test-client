@@ -14,6 +14,7 @@ import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.message.Message;
 import org.apache.cxf.phase.AbstractPhaseInterceptor;
 import org.apache.cxf.phase.Phase;
+import org.apache.cxf.service.model.MessageInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
@@ -110,8 +111,8 @@ public abstract class AbstractXUASystemUserWebServiceClient implements XUAWebSer
         }
 
         public void handleMessage(Message message) {
-            final String soapAction = (String) message.get("SOAPAction");
-            logger.info(webServiceName + ", SOAPAction: " + soapAction);
+            final String operation = ((MessageInfo) message.get("org.apache.cxf.service.model.MessageInfo")).getOperation().getName().getLocalPart();
+            logger.info(webServiceName + "; Operation: " + operation);
         }
 
         public void handleFault(Message messageParam) {

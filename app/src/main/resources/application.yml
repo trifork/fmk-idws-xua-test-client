@@ -21,7 +21,7 @@ fmkclient:
   stsIdentity:
     endpoint: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee"
     wsdl: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/employee?wsdl"
-    audience: "https://fmk"
+    audience: "https://fmk/"
   stsSystem:
     endpoint: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/system"
     wsdl: "https://test1-cnsp.ekstern-test.nspop.dk:8443/sts3/services/system?wsdl"

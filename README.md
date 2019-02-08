@@ -4,11 +4,13 @@ Client for testing the IDWS XUA support in FMK (Det Fælles Medicinkort).
 
 ## Features
 
-* Supports employee authentication by requesting a bootstrap token for accessing the following APIs:
-    * FMK 1.4.4 (MedicineCard_Idws_Xua_2015_01_01). Implemented operation: GetMedicineCard (Bootstrap scenario), GetMedicineCardVersion (System User scenario).
-    * FMK 1.4.4 E1 (MedicineCard_Idws_Xua_2015_01_01_E1). Implemented operation: GetMedicineCard.
-    * EO 1.4.4 (EffectuationOrdering_2015_01_01). Implemented operation: GetOrderedEffectuations.
-    * POR 1.4.4 E1 (PatientRegistration_2015_01_01_E1). Implemented operation: GetPatientRegistration.
+* Supports *employee authentication by requesting a bootstrap token* for accessing the following APIs:
+    * FMK 1.4.4 (WSDL: MedicineCard_Idws_Xua_2015_01_01). Implemented operation: GetMedicineCard.
+    * FMK 1.4.4 E1 (WSDL: MedicineCard_Idws_Xua_2015_01_01_E1). Implemented operation: GetMedicineCard.
+    * EO 1.4.4 (WSDL: EffectuationOrdering_2015_01_01). Implemented operation: GetOrderedEffectuations.
+    * POR 1.4.4 E1 (WSDL: PatientRegistration_2015_01_01_E1). Implemented operation: GetPatientRegistration.
+* Supports *system user authentication* for accessing the following APIs:
+    * FMK 1.4.4 (WSDL: MedicineCard_Idws_Xua_2015_01_01). Implemented operation: GetMedicineCardVersion.
 * Supports the Security token service: [NSP STS3](https://www.nspop.dk/display/STS3) (currently in development at NSP).
 * Can be invoked using the included commandline application or by using the library in e.g. an integration test.
 * Logs STS requests and responses to a file.
@@ -53,10 +55,19 @@ The application has a command line argument parser. To see available options use
 $ java -jar fmkclient.jar -h
 ```
 
-To use a specific API (see the table in the section below), use the argument *-a* and *-ws* e.g.:
+To use a specific API (see the table in the section below) and a specific endpoint, use the argument *-a* and *-ws* e.g.:
 
 ```
 $ java -jar fmkclient.jar -a EffectuationOrdering_2015_01_01 -ws https://test1.fmk.netic.dk/proxy/services/eo_xua_144
+```
+
+#### Note about the different authentication scenarios
+
+The default configuration uses the *MedicineCard_2015_01_01* API which is using the *employee authentication by requesting a bootstrap token* scenario.
+To test the *system user authentication* scenario, simply use the API *MedicineCard_2015_01_01_SystemUser* like this:
+
+```
+$ java -jar fmkclient.jar -a MedicineCard_2015_01_01_SystemUser
 ```
 
 ### Library
