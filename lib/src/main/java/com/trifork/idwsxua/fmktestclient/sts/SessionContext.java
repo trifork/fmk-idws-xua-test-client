@@ -2,33 +2,34 @@ package com.trifork.idwsxua.fmktestclient.sts;
 
 import dk.sds.samlh.model.onbehalfof.OnBehalfOf;
 import dk.sds.samlh.model.provideridentifier.ProviderIdentifier;
+import dk.sds.samlh.model.purposeofuse.PurposeOfUse;
 import dk.sds.samlh.model.resourceid.ResourceId;
 import dk.sds.samlh.model.role.Role;
 
 public class SessionContext {
-	private ResourceId resourceId;
-	private ProviderIdentifier providerIdentifier;
-	private OnBehalfOf onBehalfOf;
-	private String educationCode;
+    private ResourceId resourceId;
+    private ProviderIdentifier providerIdentifier;
+    private OnBehalfOf onBehalfOf;
+    private String educationCode;
     private boolean includeDefaultClaims;
     private Role role;
-
+    private PurposeOfUse purposeOfUse;
 
     public ResourceId getResourceId() {
-		return resourceId;
-	}
+        return resourceId;
+    }
 
-	public void setResourceId(ResourceId resourceId) {
-		this.resourceId = resourceId;
-	}
+    public void setResourceId(ResourceId resourceId) {
+        this.resourceId = resourceId;
+    }
 
-	public ProviderIdentifier getProviderIdentifier() {
-		return providerIdentifier;
-	}
+    public ProviderIdentifier getProviderIdentifier() {
+        return providerIdentifier;
+    }
 
-	public void setProviderIdentifier(ProviderIdentifier providerIdentifier) {
-		this.providerIdentifier = providerIdentifier;
-	}
+    public void setProviderIdentifier(ProviderIdentifier providerIdentifier) {
+        this.providerIdentifier = providerIdentifier;
+    }
 
     public OnBehalfOf getOnBehalfOf() {
         return onBehalfOf;
@@ -57,8 +58,16 @@ public class SessionContext {
     public Role getRole() {
         return role;
     }
-    
+
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public PurposeOfUse getPurposeOfUse() {
+        return purposeOfUse;
+    }
+
+    public void setPurposeOfUse(PurposeOfUse purposeOfUse) {
+        this.purposeOfUse = purposeOfUse;
     }
 }

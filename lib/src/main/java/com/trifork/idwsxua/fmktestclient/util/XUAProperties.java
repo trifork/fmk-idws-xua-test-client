@@ -33,6 +33,8 @@ public interface XUAProperties {
 
     String getEducationCode();
 
+    String getPurposeOfUse();
+
     class STSBootstrap {
         private String endpoint;
         private String wsdl;

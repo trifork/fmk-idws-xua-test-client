@@ -27,6 +27,7 @@ public class Properties implements XUAProperties {
 
     private int repeatDelayMs;
     private String role;
+    private String purposeOfUse;
     private String onBehalfOfAuth;
     private String onBehalfOfCpr;
     private String educationCode;
@@ -143,6 +144,15 @@ public class Properties implements XUAProperties {
     }
 
     @Override
+    public String getPurposeOfUse() {
+        return purposeOfUse;
+    }
+
+    public void setPurposeOfUse(String purposeOfUse) {
+        this.purposeOfUse = purposeOfUse;
+    }
+
+    @Override
     public String getOnBehalfOfAuth() {
         return onBehalfOfAuth;
     }
@@ -164,9 +174,8 @@ public class Properties implements XUAProperties {
     public String getEducationCode() {
         return educationCode;
     }
-    
+
     public void setEducationCode(String educationCode) {
         this.educationCode = educationCode;
     }
-
 }

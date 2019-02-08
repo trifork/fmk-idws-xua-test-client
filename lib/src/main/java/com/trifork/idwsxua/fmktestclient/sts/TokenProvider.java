@@ -6,6 +6,7 @@ import com.trifork.idwsxua.fmktestclient.util.XUAProperties;
 import dk.sds.samlh.model.onbehalfof.OnBehalfOf;
 import dk.sds.samlh.model.onbehalfof.OnBehalfOf.Legislation;
 import dk.sds.samlh.model.provideridentifier.ProviderIdentifier;
+import dk.sds.samlh.model.purposeofuse.PurposeOfUse;
 import dk.sds.samlh.model.resourceid.ResourceId;
 import dk.sds.samlh.model.role.Role;
 import org.apache.cxf.ws.security.tokenstore.SecurityToken;
@@ -56,7 +57,7 @@ public class TokenProvider {
     public void initSystemUserContext() {
         SessionContextHolder.get().setIncludeDefaultClaims(true);
         // TODO: Do not hardcode values
-        initPatientContext("541133", properties.getPersonIdentifier());
+        initPatientContext("541133", properties.getPersonIdentifier(), properties.getPurposeOfUse());
     }
 
     public void refreshBootstrapToken(STSClient stsBootstrap) throws Exception {
@@ -77,7 +78,7 @@ public class TokenProvider {
 
             SessionContextHolder.get().setIncludeDefaultClaims(true);
             // TODO: Do not hardcode values
-            initPatientContext("541133", properties.getPersonIdentifier());
+            initPatientContext("541133", properties.getPersonIdentifier(), properties.getPurposeOfUse());
         }
     }
 
@@ -126,6 +127,18 @@ public class TokenProvider {
         return resourceId;
     }
 
+    private static PurposeOfUse buildPurposeOfUse(String code) {
+        PurposeOfUse purposeOfUse = new PurposeOfUse();
+        //purposeOfUse.setCodeSystemName();
+        //purposeOfUse.setDisplayName();
+        purposeOfUse.setCodeSystem("urn:oasis:names:tc:xspa:1.0");
+        purposeOfUse.setXsiType("CE");
+        PurposeOfUse.Code codeType = PurposeOfUse.Code.valueOf(code);
+        purposeOfUse.setCode(codeType);
+
+        return purposeOfUse;
+    }
+
     private OnBehalfOf buildOnBehalfOf(String onBehalfOfAuth, String educationCode) {
         OnBehalfOf onBehalfOf = new OnBehalfOf();
         onBehalfOf.setAuthorizationCode(onBehalfOfAuth);
@@ -152,11 +165,16 @@ public class TokenProvider {
         return role;
     }
 
-    private void initPatientContext(String ydernummer, String patientCpr) {
+    private void initPatientContext(String ydernummer, String patientCpr, String purposeOfUse) {
         SessionContext ctx = SessionContextHolder.get();
-        
+
         ResourceId patientContext = buildResourceId(patientCpr);
         ctx.setResourceId(patientContext);
+
+        if (properties.getPurposeOfUse() != null) {
+            PurposeOfUse purposeOfUseType = buildPurposeOfUse(purposeOfUse);
+            ctx.setPurposeOfUse(purposeOfUseType);
+        }
 
         ProviderIdentifier providerIdentifier = buildProviderIdentifier(ydernummer);
         ctx.setProviderIdentifier(providerIdentifier);

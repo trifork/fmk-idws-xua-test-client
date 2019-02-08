@@ -55,6 +55,9 @@ public class ClaimsCallbackHandler implements CallbackHandler {
 
             if (resourceId != null) {
                 addClaim(claimsElement, RESOURCE_ID, resourceId.generate(Validate.YES));
+                if (context.getPurposeOfUse() != null) {
+                    addClaim(claimsElement, PURPOSE_OF_USE, context.getPurposeOfUse().generateElement(Validate.YES));
+                }
             }
             if (providerIdentifier != null) {
                 addClaim(claimsElement, PROVIDER_IDENTIFIER, providerIdentifier.generateElement(Validate.YES));
@@ -66,12 +69,7 @@ public class ClaimsCallbackHandler implements CallbackHandler {
                 addClaim(claimsElement, USER_EDUCATION_CODE, context.getEducationCode());
             }
             if (context.getRole() != null) {
-                Element roleElement = context.getRole().generateElement(Validate.YES);
-                
-                addClaim(claimsElement, ROLE, roleElement);
-
-                // TODO: Remove this claim when STS is fixed to use the correct claim name for role above:
-                addClaim(claimsElement, "urn:oasis:names:tc:xspa:1.0:subject:role", roleElement);
+                addClaim(claimsElement, ROLE, context.getRole().generateElement(Validate.YES));
             }
 
             callback.setClaims(claimsElement);

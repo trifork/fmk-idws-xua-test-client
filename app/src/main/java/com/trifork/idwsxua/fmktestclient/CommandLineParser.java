@@ -43,13 +43,16 @@ public class CommandLineParser {
     @Option(name = "-R", aliases = "--role", usage = "GetMedicineCardRequest: user role")
     private String role;
 
-    @Option(name = "-oa", aliases = "--onbehalfofauth", usage = "GetMedicineCardRequest: OnBehalfOf auth no")
+    @Option(name = "--purposeofuse", usage = "Purpose of use")
+    private String purposeOfUse;
+
+    @Option(name = "-oa", aliases = "--onbehalfofauth", usage = "OnBehalfOf auth no")
     private String onBehalfOfAuth;
 
-    @Option(name = "-oc", aliases = "--onbehalfofcpr", usage = "GetMedicineCardRequest: OnBehalfOf CPR")
+    @Option(name = "-oc", aliases = "--onbehalfofcpr", usage = "OnBehalfOf CPR")
     private String onBehalfOfCpr;
 
-    @Option(name = "-e", aliases = "--educationCode", usage = "GetMedicineCardRequest: Education code")
+    @Option(name = "-e", aliases = "--educationCode", usage = "Education code")
     private String educationCode;
 
     public Properties parse(String... args) {
@@ -96,6 +99,9 @@ public class CommandLineParser {
         }
         if (role != null) {
             properties.setRole(role);
+        }
+        if (purposeOfUse != null) {
+            properties.setPurposeOfUse(purposeOfUse);
         }
         if (onBehalfOfAuth != null) {
             properties.setOnBehalfOfAuth(onBehalfOfAuth);
