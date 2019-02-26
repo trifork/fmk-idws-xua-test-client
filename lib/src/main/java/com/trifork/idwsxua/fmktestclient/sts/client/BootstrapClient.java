@@ -1,7 +1,7 @@
 package com.trifork.idwsxua.fmktestclient.sts.client;
 
-import com.trifork.idwsxua.fmktestclient.sts.ActAsSelfsignedCallbackHandler;
-import com.trifork.idwsxua.fmktestclient.sts.ClientCallbackHandler;
+import com.trifork.idwsxua.fmktestclient.sts.callback.ActAsSelfsignedCallbackHandler;
+import com.trifork.idwsxua.fmktestclient.sts.callback.WSPasswordCallbackHandler;
 import com.trifork.idwsxua.fmktestclient.util.XUAProperties;
 import org.apache.cxf.Bus;
 import org.apache.cxf.BusFactory;
@@ -34,7 +34,7 @@ public class BootstrapClient implements STSClientWrapper {
         client.setUseCertificateForConfirmationKeyInfo(true);
 
         Map<String, Object> propertiesMap = new HashMap<>();
-        propertiesMap.put("ws-security.callback-handler", new ClientCallbackHandler());
+        propertiesMap.put("ws-security.callback-handler", new WSPasswordCallbackHandler());
         propertiesMap.put("ws-security.signature.properties", "sts-client.properties");
         propertiesMap.put("ws-security.encryption.username", "sts");
         propertiesMap.put("ws-security.sts.token.properties", "sts-client.properties");

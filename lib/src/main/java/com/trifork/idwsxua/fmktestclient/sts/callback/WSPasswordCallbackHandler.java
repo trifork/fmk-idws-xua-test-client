@@ -1,11 +1,11 @@
-package com.trifork.idwsxua.fmktestclient.sts;
+package com.trifork.idwsxua.fmktestclient.sts.callback;
 
 import org.apache.wss4j.common.ext.WSPasswordCallback;
 
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
 
-public class ClientCallbackHandler implements CallbackHandler {
+public class WSPasswordCallbackHandler implements CallbackHandler {
 
     @Override
     public void handle(Callback[] callbacks) {

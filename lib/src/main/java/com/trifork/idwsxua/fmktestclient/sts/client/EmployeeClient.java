@@ -1,8 +1,8 @@
 package com.trifork.idwsxua.fmktestclient.sts.client;
 
-import com.trifork.idwsxua.fmktestclient.sts.ActAsBootstrapCallbackHandler;
-import com.trifork.idwsxua.fmktestclient.sts.ClaimsCallbackHandler;
-import com.trifork.idwsxua.fmktestclient.sts.ClientCallbackHandler;
+import com.trifork.idwsxua.fmktestclient.sts.callback.ActAsBootstrapCallbackHandler;
+import com.trifork.idwsxua.fmktestclient.sts.callback.EmployeeClaimsCallbackHandler;
+import com.trifork.idwsxua.fmktestclient.sts.callback.WSPasswordCallbackHandler;
 import com.trifork.idwsxua.fmktestclient.util.XUAProperties;
 import org.apache.cxf.Bus;
 import org.apache.cxf.BusFactory;
@@ -31,11 +31,11 @@ public class EmployeeClient implements STSClientWrapper {
         client.setRequiresEntropy(false);
         client.setTokenType("http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0");
         client.setActAs(new ActAsBootstrapCallbackHandler());
-        client.setClaimsCallbackHandler(new ClaimsCallbackHandler());
+        client.setClaimsCallbackHandler(new EmployeeClaimsCallbackHandler());
         client.setKeyType("http://docs.oasis-open.org/ws-sx/ws-trust/200512/PublicKey");
 
         Map<String, Object> propertiesMap = new HashMap<>();
-        propertiesMap.put("ws-security.callback-handler", new ClientCallbackHandler());
+        propertiesMap.put("ws-security.callback-handler", new WSPasswordCallbackHandler());
         propertiesMap.put("ws-security.signature.username", "idws xua test wsc (funktionscertifikat)");
         propertiesMap.put("ws-security.signature.properties", "sts-client.properties");
         propertiesMap.put("ws-security.encryption.username", "sts");

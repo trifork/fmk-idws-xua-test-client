@@ -23,13 +23,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.trifork.idwsxua.fmktestclient.sts;
+package com.trifork.idwsxua.fmktestclient.sts.callback;
 
+import com.trifork.idwsxua.fmktestclient.sts.TokenHolder;
 import org.w3c.dom.Element;
 
-public class ActAsBootstrapCallbackHandler extends ActAsCallbackHandler {
+public class ActAsSelfsignedCallbackHandler extends ActAsCallbackHandler {
     @Override
-    protected Element getToken() {
-        return TokenHolder.bootstrapTokenElement;
+    public Element getToken() {
+        return TokenHolder.selfsigned;
     }
+
 }

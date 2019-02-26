@@ -1,4 +1,4 @@
-package com.trifork.idwsxua.fmktestclient.sts;
+package com.trifork.idwsxua.fmktestclient.sts.callback;
 
 import org.apache.cxf.ws.security.trust.delegation.DelegationCallback;
 import org.w3c.dom.Element;
