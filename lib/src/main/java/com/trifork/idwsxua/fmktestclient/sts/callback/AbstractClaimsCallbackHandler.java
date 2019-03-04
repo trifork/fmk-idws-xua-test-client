@@ -45,7 +45,9 @@ public abstract class AbstractClaimsCallbackHandler implements CallbackHandler {
         addClaim(claimsElement, SYSTEM_VERSION, "1.0");
         addClaim(claimsElement, SYSTEM_NAME, "fmk-idws-test-client");
         addClaim(claimsElement, SYSTEM_USING_ORGANISATION_NAME, "Trifork");
-        addClaim(claimsElement, ORGANIZATION_NAME, "Softwareklinikken");
+
+        // The following attribute is not needed as it will be set by the STS:
+        //addClaim(claimsElement, ORGANIZATION_NAME, "Softwareklinikken");
     }
 
     @SuppressWarnings("Duplicates")

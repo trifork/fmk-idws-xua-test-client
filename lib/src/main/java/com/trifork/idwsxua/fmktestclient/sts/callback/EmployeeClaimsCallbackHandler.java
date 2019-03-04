@@ -29,7 +29,6 @@ public class EmployeeClaimsCallbackHandler extends AbstractClaimsCallbackHandler
             claimsElement.setAttributeNS(null, "Dialect", "http://docs.oasis-open.org/wsfed/authorization/200706/authclaims");
             doc.appendChild(claimsElement);
 
-            // TODO: Do not hardcode values
             if (context.isIncludeDefaultClaims()) {
                 addDefaultClaims(claimsElement);
             }

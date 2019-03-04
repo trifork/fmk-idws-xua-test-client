@@ -84,4 +84,4 @@ PatientRegistration_2015_01_01_E1 | https://test1.fmk.netic.dk/proxy/services/po
 
 
 The lib-module can be used as a library e.g. for integration tests. This requires Spring and can be done by importing the configuration class *IDWSXUALibSpringConfiguration*.
-Several configuration and certificate files must be provided. A Spring component implementing `XUAProperties` must me made available in the Spring context. See the app-module as an example of usage.
+Several configuration and certificate files must be provided. A Spring component implementing `XUAProperties` must be made available in the Spring context. See the app-module as an example of usage.
