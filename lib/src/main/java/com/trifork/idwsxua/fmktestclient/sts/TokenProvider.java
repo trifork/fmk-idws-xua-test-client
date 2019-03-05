@@ -57,7 +57,7 @@ public class TokenProvider {
     public void initSystemUserContext() {
         SessionContextHolder.get().setIncludeDefaultClaims(true);
         // TODO: Do not hardcode values
-        initPatientContext("541133", properties.getPersonIdentifier(), properties.getPurposeOfUse());
+        setPatientContext();
     }
 
     public void refreshBootstrapToken(STSClient stsBootstrap) throws Exception {
@@ -77,8 +77,7 @@ public class TokenProvider {
             // logger.debug(XmlHelper.node2String(bootstrapToken.getToken(), true, true));
 
             SessionContextHolder.get().setIncludeDefaultClaims(true);
-            // TODO: Do not hardcode values
-            initPatientContext("541133", properties.getPersonIdentifier(), properties.getPurposeOfUse());
+            setPatientContext();
         }
     }
 
@@ -108,12 +107,13 @@ public class TokenProvider {
         }
     }
 
-    private static ProviderIdentifier buildProviderIdentifier(String ydernummer) {
+    private static ProviderIdentifier buildProviderIdentifier() {
         ProviderIdentifier providerIdentifier = new ProviderIdentifier();
 
+        // TODO: Do not hardcode values
         providerIdentifier.setRoot("1.2.208.176.1.4");
         providerIdentifier.setXsiType("II");
-        providerIdentifier.setExtension(ydernummer + "^description");
+        providerIdentifier.setExtension("541133" + "^description");
 
         return providerIdentifier;
     }
@@ -165,31 +165,33 @@ public class TokenProvider {
         return role;
     }
 
-    private void initPatientContext(String ydernummer, String patientCpr, String purposeOfUse) {
+    private void setPatientContext() {
         SessionContext ctx = SessionContextHolder.get();
 
-        ResourceId patientContext = buildResourceId(patientCpr);
+        ResourceId patientContext = buildResourceId(properties.getPersonIdentifier());
         ctx.setResourceId(patientContext);
 
-        if (properties.getPurposeOfUse() != null) {
+        String purposeOfUse = properties.getPurposeOfUse();
+        if (purposeOfUse != null) {
             PurposeOfUse purposeOfUseType = buildPurposeOfUse(purposeOfUse);
             ctx.setPurposeOfUse(purposeOfUseType);
         }
 
-        ProviderIdentifier providerIdentifier = buildProviderIdentifier(ydernummer);
+        ProviderIdentifier providerIdentifier = buildProviderIdentifier();
         ctx.setProviderIdentifier(providerIdentifier);
-        
-        
-        if (properties.getOnBehalfOfAuth() != null) {
-            OnBehalfOf onBehalfOf = buildOnBehalfOf(properties.getOnBehalfOfAuth(), properties.getEducationCode());
+
+        String onBehalfOfAuth = properties.getOnBehalfOfAuth();
+        if (onBehalfOfAuth != null) {
+            OnBehalfOf onBehalfOf = buildOnBehalfOf(onBehalfOfAuth, properties.getEducationCode());
             ctx.setOnBehalfOf(onBehalfOf);
         } else if (properties.getEducationCode() != null) {
             ctx.setEducationCode(properties.getEducationCode());
-        } 
-        
-        if (properties.getRole() != null) {
-            Role role = buildRole(properties.getRole());
-            ctx.setRole(role);
+        }
+
+        String role = properties.getRole();
+        if (role != null) {
+            Role roleElement = buildRole(role);
+            ctx.setRole(roleElement);
         }
     }
 

@@ -61,7 +61,7 @@ To use a specific API (see the table in the section below) and a specific endpoi
 $ java -jar fmkclient.jar -a EffectuationOrdering_2015_01_01 -ws https://test1.fmk.netic.dk/proxy/services/eo_xua_144
 ```
 
-#### Note about the different authentication scenarios
+#### Testing of different authentication scenarios
 
 The default configuration uses the *MedicineCard_2015_01_01* API which is using the *employee authentication by requesting a bootstrap token* scenario.
 To test the *system user authentication* scenario, simply use the API *MedicineCard_2015_01_01_SystemUser* like this:
@@ -69,6 +69,14 @@ To test the *system user authentication* scenario, simply use the API *MedicineC
 ```
 $ java -jar fmkclient.jar -a MedicineCard_2015_01_01_SystemUser
 ```
+
+#### Testing of "Purpose of use"
+
+To test the attribute `urn:oasis:names:tc:xspa:1.0:subject:purposeofuse` use the following argument:
+
+```
+$ java -jar fmkclient.jar --purposeofuse EMERGENCY
+``` 
 
 ### Library
 
