@@ -81,6 +81,7 @@ public abstract class AbstractXUABootstrapWebServiceClient implements XUAWebServ
         Client client = ClientProxy.getClient(getPort());
         client.getOutInterceptors().add(new LoggingOutInterceptor());
         client.getOutInterceptors().add(new CustomLoggingOutInterceptor("WSP"));
+        client.getOutInterceptors().add(new TestContentTypeOutInterceptor());
         client.getInInterceptors().add(new LoggingInInterceptor());
 
         addWSSecurity((BindingProvider) getPort(), stsIdentity);

@@ -77,6 +77,7 @@ public abstract class AbstractXUASystemUserWebServiceClient implements XUAWebSer
         Client client = ClientProxy.getClient(getPort());
         client.getOutInterceptors().add(new LoggingOutInterceptor());
         client.getOutInterceptors().add(new CustomLoggingOutInterceptor("WSP"));
+        client.getOutInterceptors().add(new TestContentTypeOutInterceptor());
         client.getInInterceptors().add(new LoggingInInterceptor());
 
         addWSSecurity((BindingProvider) getPort(), stsSystem);
